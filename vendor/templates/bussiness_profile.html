@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>FindMe</title>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body class="antialiased sans-serif content-center" style="background-color: #eee;" >
+	<div x-data="app()" x-cloak>
+		<div class="max-w-3xl mx-auto px-4 py-10">
+			<div>	
+
+				<!-- Step Content -->
+        	<form id="form_submit" action="" method="POST" enctype="multipart/form-data">
+          	{% csrf_token %}
+			    <div class="w-1/4 m-w-450 h-auto rounded-lg bg-white py-8 px-7 center grid grid-cols-1 divide-y divide-gray-500" style="min-width: 850px; padding: 2%;"}>
+					<div style="margin-bottom: 5%;">
+						<h2 class="text-4xl font-bold text-gray-700 " style="margin-bottom: 1%;">Contact Details</h2>
+						<div class="mb-5 text-center">
+							<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
+								<img id="image" class="object-cover w-full h-32 rounded-full" :src="image" />
+							</div>
+							
+							<label 
+								for="fileInput"
+								type="button"
+								class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+									<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+									<circle cx="12" cy="13" r="3" />
+								</svg>						
+								Browse Photo
+							</label>
+
+							<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-1">Click to add profile picture</div>
+
+							<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" @change="let file = document.getElementById('fileInput').files[0]; 
+								var reader = new FileReader();
+								reader.onload = (e) => image = e.target.result;
+								reader.readAsDataURL(file);">
+						</div>
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="grid-first-name">
+								  Full Name
+								</label>
+								<input type="text" name="Person_name" id="Person_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your full name">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+								  Email
+								</label>
+								<input value = {{vendor.email}} type="email" name="emails" id="emails" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter email">
+							  </div>
+							  
+						  
+						</div>
+
+						<div class="mb-5">
+							<label for="Designation" class="font-bold mb-1 text-gray-700 block">Designation</label>
+							<input type="text" name="designation" id="designation" 
+								class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+								placeholder="Enter your designation...">
+						</div>
+							
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="Mobile Number">
+								  Mobile Number
+								</label>
+								<input value = {{vendor.phone_no}} type="number" name="mobile_no" id="mobile_no" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your mobile number...">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="Whatsapp Number">
+								  Whatsapp Number
+								</label>
+								<input type="number" name="whatsapp_no" id="whatsapp_no" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter your Whatsapp Number...">
+							  </div>
+						  
+						</div>
+						<div class="md:flex mb-6">
+							<div class="md:w-1/3"></div>
+							<label class="md:w-2/3 block text-gray-500 font-bold">
+							  <input class="mr-2 leading-tight" type="checkbox" id="same" name="same" onchange= "billingFunction()">
+							  <span class= "text-sm">
+								Same as mobile number
+							  </span>
+							</label>
+						  </div>
+					</div>
+					<div style="margin-bottom: 5%;">
+						<h2 class="text-4xl font-bold text-gray-700 " style="margin-bottom: 2%; margin-top: 5%;">Company Details</h2>
+						<div class="mb-5 text-center">
+							<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
+								<img id="logo" class="object-cover w-full h-32 rounded-full" :src="logo" />
+							</div>
+							
+							<label 
+								for="fileInput1"
+								type="button"
+								class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+									<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+									<circle cx="12" cy="13" r="3" />
+								</svg>						
+								Browse Photo
+							</label>
+
+							<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-1">Click to add company logo</div>
+
+							<input name="company_photo" id="fileInput1" accept="image/*" class="hidden" type="file" @change="let file1 = document.getElementById('fileInput1').files[0]; 
+								var reader = new FileReader();
+								reader.onload = (e) => logo = e.target.result;
+								reader.readAsDataURL(file1);">
+						</div>
+
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="compName">
+								  Business Name
+								</label>
+								{% comment %} <input value = {{vendor.business_name}} type="text" name="company_name" id="company_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your company name..."> {% endcomment %}
+								<textarea style="resize: none; " type="text" name="company_name" id="company_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your company name...">{{vendor.business_name}}</textarea>
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="websiteUrl">
+								  Website URL
+								</label>
+								<input type="url" name="website" id="website" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter your Website Url...">
+							  </div>
+						  
+						</div>
+
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="compName">
+								  Instagram ID
+								</label>
+								<input type="text" name="Instagram" id="Instagram" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter your Instagram id...">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="websiteUrl">
+								  Facebook ID
+								</label>
+								<input type="url" name="Facebook" id="Facebook" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter your Facebook id...">
+							  </div>
+						  
+						</div>
+
+						<div class="mb-5">
+							<label for="estYear" class="font-bold mb-1 text-gray-700 block">Year of Establishment</label>
+							<input type="text" name="year_established" id="year_established"
+								class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+								placeholder="Enter the Year of Establishment...">
+						</div>
+
+					</div>
+					<div>
+						<h2 class="text-4xl font-bold text-gray-700 " style="margin-bottom: 2%; margin-top:5% ;">Address Details</h2>
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="addL1">
+								  Address Line 1
+								</label>
+								<input  type="text" name="address_line1" id="address_line1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter the address line 1...">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="addL2">
+									Address Line 2
+								</label>
+								<input type="text" name="address_line2" id="address_line2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter the address line 2...">
+							  </div>
+						  
+						</div>
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="city">
+								  City
+								</label>
+								<input type="text" name="city" id="city" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter the city...">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="state">
+									State
+								</label>
+								<input type="text" name="state" id="state" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter the state...">
+							  </div>
+						  
+						</div>
+
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="font-bold mb-1 text-gray-700 block" for="country">
+								  Country
+								</label>
+								<input type="text" name="country" id="country" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Enter the country...">
+							  </div>
+							  <div class="w-full md:w-1/2 px-3">
+								<label class="font-bold mb-1 text-gray-700 block" for="pincode">
+									Pin Code
+								</label>
+								<input type="number" name="pincode" id="pincode" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Enter the pincode...">
+							  </div>
+						  
+						</div>
+
+						<div class="mb-5">
+							<label for="landmark" class="font-bold mb-1 text-gray-700 block">Landmark</label>
+							<input type="text" name="landmark" id="landmark"
+								class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+								placeholder="Enter the landmark...">
+						</div>	
+					</div>
+					</div>
+				<!-- / Step Content -->
+			</div>
+  
+		</div>
+  </form>
+		<!-- Bottom Navigation -->	
+			<div style="margin-left: 30%; margin-bottom: 5%;" class="max-w-3xl mx-auto px-4">
+
+					<div class="w-1/2 text-right">
+             
+            <button  onclick="submit()" class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+          >Complete</button>
+            
+					</div>
+				</div>
+		</div>
+	</div>
+
+	<script>
+		function billingFunction(){
+		if (document.getElementById('same').checked){
+     var mobile_no =  document.getElementById('mobile_no').value;
+      
+     document.getElementById('whatsapp_no').value = mobile_no;
+     
+		}
+		else{ 
+			document.getElementById('whatsapp_no').value = "";
+		}
+}
+		function app() {
+			return {
+				step: 1, 
+				passwordStrengthText: '',
+				togglePassword: false,
+
+				image: 'image.jpeg',
+				logo: 'logo.jpg',
+				gender: 'Male',
+
+			}
+		}
+	</script>
+  <script>
+    function submit(){
+      let form=document.getElementById("form_submit");
+      form.submit();
+    }
+  </script>
+</body>
+<!-- partial -->
+<!-- <script type="text/javascript">
+  $(document).on('submit', '#post-form', function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url:'',
+      data:{
+        name:$('#name').val(),
+        emails=request.POST['emails']
+        desg=request.POST['designation']
+        mobile_no=request.POST['mobile_no']
+        alter_no=request.POST['alternate_no']
+        company_name=request.POST['company_name']
+        year_established=request.POST['year_established']
+        company_ceo=request.POST['ceo_name']
+        website=request.POST['website']
+        address_l1=request.POST['address_line1']
+        address_l2=request.POST['address_line2']
+        pincode=request.POST['pincode']
+        city=request.POST['city']
+        state=request.POST['state']
+        country=request.POST['country']
+        landmark=request.POST['landmark']
+      }
+    })
+  })
+</script> -->
+ 
+</body>
+</html>

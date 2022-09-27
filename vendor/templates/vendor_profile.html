@@ -1,0 +1,635 @@
+{% extends 'vendor_main.html' %}
+
+{% load static %}
+{%block content%}
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+
+}
+
+
+body{
+    background-color: whitesmoke;
+    font-family: sans-serif
+}
+.navbar{
+    max-height: 80px;
+    max-width: 100%;
+}
+.form-inline{
+    /* margin: -10px 10px 0px 2px; */
+    display: flex;
+}
+.form-control{
+    min-width: 500px;
+    margin: 3px 5px 0px 0px;
+}
+
+.navbar-brand{
+    padding: 2px 20px 1px 20px;
+}
+
+.username{
+    color: aliceblue;
+    font-size: 20px;
+    margin-right: 4%;
+}
+
+
+
+  .username{
+      margin-right: 4%;
+  }
+  
+ .topnav .icon {
+  display: none;
+}
+
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+        margin-right: -50%;
+    }
+
+    }
+
+    @media screen and (max-width: 992px) {
+        body {
+            background-color: blue;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        body {
+            background-color: black;
+        }
+        .topnav.responsive {position: relative;}
+        .topnav .responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #search{
+            display: block;
+            width: 10%;
+            float: left;
+            margin-right: 0%;
+        }
+        .topnav .responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+            
+        }
+       
+        .navbar-brand{
+            display: block;
+            padding: 0px 0px 0px 0px;
+            size: 10px;
+        }
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        width:180px;
+        font-size: 16px;
+        border: none;
+      }
+      
+      .username {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-size:13px;
+      }
+      
+      .dropdown-content a:hover {background-color: #ddd;}
+      
+      .username:hover .dropdown-content {display: block;}
+      
+      .username:hover .dropbtn {background-color: #3e8e41;}
+
+</style>
+<nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+  </a>
+<a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+{% comment %} <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+  {% csrf_token %}
+  <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+</form> {% endcomment %}
+<div class="username">
+    <button class="dropbtn">{{ current_email }}</button>
+    <div class="dropdown-content" style= "z-index: 9;">
+      {% comment %} <a href="{% url 'my_orders' %}">My Orders</a>
+      <a href="{% url 'edit_profile' %}">Edit Profile</a> {% endcomment %}
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+</nav>
+
+
+  <div id="editDetails" class="modal" style="">
+      <!-- Modal content -->
+      <div class="modal-content" style="height: 100%; width: 75%; padding: 1%;">
+        <div class="" style="width: 100%; padding: 0%; height: fit-content;">
+          <button id="VendorInfo-btn" style="float: left; background-color: white; border: none; height: 100%; width: 50%; padding: 1%;" onclick="AboutFormFunc('VendorInfo')"><h4>Vendor Details</h4></button>
+          <button id="CompanyInfo-btn" style="float: right; background-color: white; border: none; height: 100%; width: 50%; padding: 1%;" onclick="AboutFormFunc('CompanyInfo')"><h4>Company Details</h4></button>
+        </div>
+        <!-- Vendor form -->
+        <form style="overflow: auto; height: fit-content;" action="{% url 'vendor_profile' %}" method="post" id="VendorInfo" class="" >
+          {% csrf_token %}
+          <div style="height: fit-content;padding: 4%; margin: 3%; margin-top: 1%;">
+            
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Name</h5></label>
+                <input value="{{vendor.Person_name}}" name="name" type="text" id="Password" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-0" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Designation</h5></label>
+                <input value="{{vendor.designaton}}" name="designation" type="text" id="Password" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Mobile Number</h5></label>
+                <input value="{{vendor.mobile_no}}" name="mobile_no" type="text" id="Password" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Whatsapp Number</h5></label>
+                <input value="{{vendor.whatsapp_no}}" name="alternate_no" type="text" id="Password" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>About</h5></label>
+                <input value="{{vendor.about}}" name="about" type="text" id="Password" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+            
+            <!-- Save and cancel -->
+            <div style="width: 100%; margin: 2%;">
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; min-width: 150px; max-width: fit-content; height: fit-content;">
+                <input  type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div>
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; width: 150px; height: fit-content;">
+                <input type="button" onclick="AboutFormFunc('EditInfoClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+
+              </div> 
+            </div>
+
+            {% comment %} <div style="width: 20%; margin: 2%; display: inline;">
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" min-width: 150px; max-width: fit-content; height: fit-content;">
+                <input  type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div>
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" width: 150px; height: fit-content;">
+                <input type="button" onclick="AboutFormFunc('EditInfoClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div> 
+            </div> {% endcomment %}
+          </div> 
+        </form>
+        
+        <!-- Company form -->
+        <form style="overflow: auto; height: fit-content; display:none;" action="{% url 'vendor_profile' %}" method="post" id="CompanyInfo" class="" >
+          {% csrf_token %}
+          <div style="height: fit-content;padding: 4%; margin: 3%; margin-top: 1%;">
+            
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Company Name</h5></label>
+                <input  value="{{vendor.company_name}}"  name="company_name" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-0" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Year Established</h5></label>
+                <input value="{{vendor.year_established}}" name="year" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-0" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Ceo Name</h5></label>
+                <input value="{{vendor.ceo_name}}" name="ceo" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Address Line 1</h5></label>
+                <input value="{{vendor.address_line1}}" name="address1" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Address Line 2</h5></label>
+                <input value="{{vendor.address_line2}}" name="address2" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Pin Code</h5></label>
+                <input value="{{vendor.pincode}}" name="pincode" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>City</h5></label>
+                <input value="{{vendor.city}}" name="city" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>State</h5></label>
+                <input value="{{vendor.state}}" name="state" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Country</h5></label>
+                <input value="{{vendor.country}}" name="country" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+              <div class="form-outline flex-fill mb-0">
+                <label  class="form-label" for="form3Example4c"><h5>Landmark</h5></label>
+                <input value="{{vendor.landmark}}" name="landmark" type="text" id="" class="" style="width: 100%;" required/>
+              </div>
+            </div>
+
+            <!-- Save and cancel -->
+            <div style="width: 100%; margin: 2%;">
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; min-width: 150px; max-width: fit-content; height: fit-content;">
+                <input type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div>
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; width: 150px; height: fit-content;">
+                <input type="button" onclick="AboutFormFunc('EditInfoClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div> 
+            </div>
+
+            {% comment %} <div style="width: 20%; margin: 2%; display: inline;">
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" min-width: 150px; max-width: fit-content; height: fit-content;">
+                <input type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div>
+
+              <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" width: 150px; height: fit-content;">
+                <input type="button" onclick="AboutFormFunc('EditInfoClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+              </div> 
+            </div> {% endcomment %}
+
+
+          </div>
+          
+        </form>
+      </div>
+  </div>
+
+
+  <div id="ProductInfo" class="modal" style="">
+    <!-- Modal content -->
+    <div class="modal-content" style="height: 100%; width: 75%; padding: 1%;">
+      <!-- Product form -->
+      <form style="overflow: auto; height: fit-content;" action="{% url 'vendor_profile' %}" method="post" id="editProductInfo" class="" >
+        {% csrf_token %}
+        <div style="height: fit-content;padding: 4%; margin: 3%; margin-top: 1%;">
+          
+          <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+            <div class="form-outline flex-fill mb-0">
+              <label  class="form-label" for="form3Example4c"><h5>Product Name</h5></label>
+              <input value="{{vendor.Person_name}}" name="name" type="text" id="Password" class="" style="width: 100%;" required/>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-0" style="width: 90%; padding: 2%;"> 
+            <div class="form-outline flex-fill mb-0">
+              <label  class="form-label" for="form3Example4c"><h5>Description</h5></label>
+              <input value="{{vendor.designaton}}" name="designation" type="text" id="Password" class="" style="width: 100%;" required/>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+            <div class="form-outline flex-fill mb-0">
+              <label  class="form-label" for="form3Example4c"><h5>Price</h5></label>
+              <input value="{{vendor.mobile_no}}" name="mobile_no" type="text" id="Password" class="" style="width: 100%;" required/>
+            </div>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-1" style="width: 90%; padding: 2%;"> 
+            <div class="form-outline flex-fill mb-0">
+              <label  class="form-label" for="form3Example4c"><h5>Quantity</h5></label>
+              <input value="{{vendor.alternate_no}}" name="alternate_no" type="text" id="Password" class="" style="width: 100%;" required/>
+            </div>
+          </div>
+
+          
+          <!-- Save and cancel -->
+          <div style="width: 100%; margin: 2%;">
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; min-width: 150px; max-width: fit-content; height: fit-content;">
+              <input  type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+            </div>
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; width: 150px; height: fit-content;">
+              <input type="button" onclick="AboutFormFunc('ProductClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+            </div> 
+          </div>
+
+          {% comment %} <div style="width: 20%; margin: 2%; display: inline;">
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" min-width: 150px; max-width: fit-content; height: fit-content;">
+              <input  type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+            </div>
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style=" width: 150px; height: fit-content;">
+              <input type="button" onclick="AboutFormFunc('EditInfoClose')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+            </div> 
+          </div> {% endcomment %}
+        </div> 
+      </form>
+    </div>
+  </div>
+  
+    <!-- <section class="col" style="background-color: #eee; "> -->
+      <div class=" gutters-sm p-3 main" style=" display: inline-flex; width: 100%">
+
+        <!-- Left Column -->
+        <div class="ml-3 col-md-4 card" style="border: #ccc; display: block; float: left; height: 50%;">
+          <button style="float: right; background-color: inherit; border: none; height: fit-content; width: fit-content;" onclick="AboutFormFunc('EditInfo')"><i  class="fas fa-edit"></i></button>
+          <!-- </form> -->
+          <div class="card-body">
+            <div>
+              <div style="bac" class="d-flex flex-column align-items-center text-center p-1">
+                {% comment %} <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"> {% endcomment %}
+                <img class="rounded-circle" height="200px" width="200px" src = "{{ vendor.profile_pic.url }}" alt='{{vendor.profile_pic}}'>
+
+                <div class="mt-3">
+                  <h4> {{vendor.company_name}}</h4>
+                  <p class=" mb-1">{{vendor.Person_name}}</p>
+                  <p class=" font-size-sm">{{vendor.city}}, {{vendor.state}}, {{vendor.country}}</p>
+                  <p class=" font-size-sm"><strong>Instagram:</strong>{{vendor.instagram}}</p>
+                  <p class=" font-size-sm"><strong>Facebook Name:</strong>{{vendor.facebook}}</p>
+
+                  {% comment %} <button class="btn btn-primary">Follow</button> {% endcomment %}
+                  {% comment %} <a href="https://api.whatsapp.com/send/?phone={{vendor.whatsapp_no}}" style="width:fit-conent; height: fit-content; padding:2%;"><button class="btn btn-lg btn-primary"> {% endcomment %}
+                  </button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Middle content -->
+        <div class=" col bg-light m-3 mt-0 p-3" style="display: block; width: fit-content; height: fit-content; height: 50%;">
+          <!-- About  -->
+          <div>
+            <button style="float: right; background-color: inherit; border: none; height: fit-content; width: fit-content;" onclick="AboutFormFunc('EditAbout')"><i  class="fas fa-edit"></i></button>
+            
+            <h2>About</h2>
+            <p id="About" style="display: block;">{{vendor.about}}</p> 
+            <form style="display: none;" action="{% url 'vendor_profile' %}" method="post" id="aboutForm" class="" >
+              {% csrf_token %}
+              <div style="width: 100%; display: flex; height: 200px;">
+                <div style="width: 80%;">
+                  <!-- <input style="display: flex;"  type="text" name="About" id="About" class="form-control" required/> -->
+                  <textarea type="text" name="Edit_About" style="width:100%;height:200px;" required>{{vendor.about}}</textarea>
+                </div>
+                <div style="width: 20%; margin: 2%;">
+                  <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; min-width: 150px; max-width: fit-content; height: fit-content;">
+                    <input type="submit" value="SAVE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+                  </div>
+      
+                  <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex;min-width: 150px; max-width: fit-content; height: fit-content;">
+                    <input type="button" onclick="AboutFormFunc('Close')" value="CANCEL" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;">
+                  </div> 
+                </div>
+              </div>
+            </form>
+            
+          </div>
+
+          <!-- Link for vendors -->
+          {% comment %} <div>
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; min-width: 200px; max-width: fit-content; height: fit-content;">
+              <!-- <input type="submit" value="BUSINESS PROFILE" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;"> -->
+              <a class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;" aria-current="page" href="{% url 'bussiness_profile' %}">Bussiness Profile</a>
+            </div> {% endcomment %}
+
+            <div class="col-md-6 bg-dark align-items-center  m-2 p-1" style="display: inline-flex; width: 200px; height: fit-content;">
+              <!-- <input type="submit" value="ADD PRODUCTS" class="btn btn-primary btn-lg bg-dark" style="text-decoration: none; border: none;"> -->
+              <a class="btn btn-primary btn-lg bg-dark" aria-current="page" style="text-decoration: none; border: none;" href="/add_products">Add Products</a>
+
+            </div>  
+          </div>
+        </div>
+      </div>
+     {% comment %} {% block content %}
+
+     {%endblock%}
+     {% endcomment %}
+    {% comment %} {%if products%}
+    <div class="p-10 min-vh-100" style="display: inline-flex; width: 100%">
+      
+   <div class="carousel">
+      <div class="carousel-row">
+        {%for product in products%}
+          
+          <div class="carousel-tile">
+            <img src="{{ product.product_image.url }}" alt='{{product.product_image}}'> 
+          </div>
+          
+          {% endfor %}
+        </div>
+    </div>  </div> </div>
+    {% endif %} {% endcomment %}
+    
+  
+{% comment %} Products {% endcomment %}
+<div>
+  {% if orders %}
+  <h1 class="bg-dark" style="color:white;width:100%;padding:1%; background-color:white;"><span style="color: #198754;" > My</span> Orders </h1>
+  <div  class="vh-100 p-3" style="position: relative; background:white; height:fit-content;">
+  <div style=" overflow-y:scroll; max-height:90%; background-color:white;" class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 p-2">
+    {% for order in orders %} 
+    {% comment %} {%if product.product_id %} {% endcomment %}
+  <form id="form_submit" action="{% url 'add_products' %}" method="POST" enctype="">
+      {% csrf_token %}
+    <div style="height:100%; width:100%;" class=" p-2">
+          <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color:white;" class="border">
+            <div style="width:100%;">
+              <div style = "width:30%; float:left;">
+                  {% if order.product.product_image %}
+                   <img height="100px" width="100%" src="{{ order.product.product_image.url }}" alt='{{order.product_image}}'>
+                   {% endif %}
+              </div>
+              <input type="text" name="id" value="{{ product.product_id }}" style="display:none;">
+              <div style = "width:70%; float:left; padding:1%; height:100px;">
+                <p class="m-1">Product: {{order.product.product_name}}</p>
+                <p class="m-1">Price:  Rs. {{order.product.Price}}</p>
+                <p class="m-1">Quantity: {{order.quantity}}</p>
+              </div>
+            </div>
+            <div>
+              <div class="card-content">
+                  <div class="row">
+                      <div class="col s12">
+                          <p class="m-1"><strong>Customer: </strong> {{ order.user.name }}</p>
+                          <p class="m-1"><strong>Order Note: </strong>{{order.order.order_note}}</p>
+                          <p class="m-1"><strong>Phone Number: </strong>{{order.order.phone}}</p>
+                          <p class="m-1"><strong>Address line 1: </strong>{{order.order.address_line_1}}</p>
+                          <p class="m-1"><strong>Address line 2: </strong>{{order.order.address_line_2}}</p>
+                          <p class="m-1"><strong>City: </strong>{{order.order.city}}</p>
+                          <p class="m-1"><strong>State: </strong>{{order.order.state}}</p>
+                          <p class="m-1"><strong>Country: </strong>{{order.order.country}}</p>
+                          <p class="m-1"><strong>Status: </strong>{{order.status}}</p>
+                      </div>
+                  </div>
+                  <div class="d-grid gap-2 my-4">
+                      {% if order.status == 'Placed' %}
+                        <a class="btn btn-primary btn-lg bg-dark" aria-current="page" style="text-decoration: none; border: none; width:85%;margin:auto;" href="/change_status/Accept/{{order.order_id}}/{{order.product_id}}">Accept</a>
+                      {% elif order.status == 'Accepted' %}
+                        <a class="btn btn-primary btn-lg bg-dark" aria-current="page" style="text-decoration: none; border: none; width:85%;margin:auto;" href="/change_status/Complete/{{order.order_id}}/{{order.product_id}}">Complete</a>
+                      {% else %}
+                        <a class="btn btn-primary btn-lg bg-dark" aria-current="page" style="text-decoration: none; border: none; opacity:0.5; width:85%;margin:auto;" href="">Completed</a>
+
+                      {%endif%}
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+  </form>
+  {% endfor %}
+</div> 
+</div> {%endif%}
+</div>
+
+    {% if products %}
+    <h1 class="bg-dark" style="color:white;width:100%;padding:1%;"><span style="color: #198754;" > My</span> Products </h1>
+  <div  class="vh-100 p-3" style="position: relative; background:white;">
+  <div style=" overflow-y:scroll; max-height:85%; background-color:white;" class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 p-2">
+    {% comment %} <div style=" overflow-y:scroll; max-height:85%;" class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6"> {% endcomment %}
+      {% for product in products %} {%if product.product_id%}
+    <form id="form_submit" action="{% url 'add_products' %}" method="GET" enctype="">
+        {% csrf_token %}
+        <div style="height:fit-content; width:fit-content" class="">
+            <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background:white;" class="">
+                <div class="">
+                    {% comment %} <a href="#" class="btn-floating btn-large price waves-effect waves-light brown darken-3"></a> {% endcomment %}
+
+                    {% if product.product_image %}
+                {% comment %} <img class="rounded-circle" height="200px" width="200px" src="{{ product.product_image.url }}" alt='{{product.product_image}}'> {% endcomment %}
+
+                    <img height="200px" width="200px" src="{{ product.product_image.url }}" alt='{{product.product_image}}'>
+                     {% endif %}
+                </div>
+                <input type="text" name="id" value="{{ product.product_id }}" style="display:none;">
+              
+                    
+                {% comment %} <a id="buy" class="btn-floating waves-effect waves-light blue"><i class="material-icons buy">add_shopping_cart</i></a> {% endcomment %}
+                <button style="float: right; background-color: inherit; border: none; height: fit-content; width: fit-content;" onclick="AboutFormFunc('EditProductInfo')"><i  class="fas fa-edit"></i></button>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                              Rs. {{ product.Price }}<br/>
+                                <strong>{{ product.product_name }}</strong> <br />Q: {{ product.stock }}
+                            </p>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+            <div class="d-grid gap-2 my-4">
+              <input type="submit" name="product" value="Edit" class="btn btn-success bold-btn" style="color:white; background:green;">
+               <a class="btn btn-primary btn-lg bg-dark" aria-current="page" style="text-decoration: none; border: none;" href="/delete_products/{{product.product_id}}">Delete Product</a>          
+           </div>
+        </div>
+    </form>
+    {%endif%}{%endfor%}
+  </div> 
+</div> {%endif%}
+</div>
+  <script>
+    function AboutFormFunc(act) {
+            if (act == 'EditAbout'){
+              document.getElementById("aboutForm").style.display = "block";
+              document.getElementById("About").style.display = "none";
+
+            }
+            if (act == 'Close'){
+            document.getElementById("aboutForm").style.display = "none";
+            document.getElementById("About").style.display = "block";
+            }
+            if (act == 'EditInfo'){
+            document.getElementById("editDetails").style.display = "block";
+            document.getElementById("VendorInfo").style.display = "block";
+            document.getElementById("VendorInfo-btn").style.background = "#04AA6D";
+            document.getElementById("CompanyInfo-btn").style.background = "#eee";
+            
+            }
+            if (act == 'EditInfoClose'){
+            document.getElementById("VendorInfo").style.display = "none";
+            document.getElementById("CompanyInfo").style.display = "none";
+            document.getElementById("editDetails").style.display = "none";
+            // document.getElementById("About").style.display = "block";
+            }
+            {% comment %} if (act == 'EditProductInfo'){
+              document.getElementById("ProductInfo").style.display = "block";
+              }
+            if (act == 'ProductClose'){
+              document.getElementById("ProductInfo").style.display = "none";
+              // document.getElementById("About").style.display = "block";
+              } {% endcomment %}
+            if (act == 'VendorInfo'){
+            document.getElementById("VendorInfo").style.display = "block";
+            document.getElementById("VendorInfo-btn").style.background = "#04AA6D";
+            document.getElementById("CompanyInfo").style.display = "none";
+            document.getElementById("CompanyInfo-btn").style.background = "#eee";
+
+            }
+            if (act == 'CompanyInfo'){
+            document.getElementById("VendorInfo").style.display = "none";
+            document.getElementById("VendorInfo-btn").style.background = "#eee";
+            document.getElementById("CompanyInfo").style.display = "block";
+            document.getElementById("CompanyInfo-btn").style.background = "#04AA6D";
+            }
+        }
+  </script>
+{%endblock%}

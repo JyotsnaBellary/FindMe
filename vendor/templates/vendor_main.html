@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css'>
+    <link rel="stylesheet" href={% static 'static/css/products.css' %}>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    {% comment %} <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'> {% endcomment %}
+    <link rel="stylesheet" href={% static 'static/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'static/css/vendor_profile_display.css' %}>
+    <link rel="stylesheet" href={% static 'static/css/carousel.css' %}>
+
+    <title>FindMe</title>
+    <style>
+        
+
+    </style>
+
+    <script>
+        function hideMenu() {
+                    document.getElementById('dropdown-menu').style.display = 'block';
+        }
+    </script>
+
+<script type="text/javascript">  
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    function myFunction() {
+        if (document.getElementById("dropdown-content").style.display = 'none'){
+            document.getElementById("dropdown-content").style.display = 'block';
+            element.classList.add("fa-angle-down");
+            element.classList.remove("fa-angle-right");
+        }
+        else if (document.getElementById("dropdown-content").style.display = 'block'){
+            document.getElementById("dropdown-content").style.display = 'none';
+        }
+    }
+
+    </script>
+  </head>
+  <body style="">
+  {% comment %} {% include "vendor_profile.html" %}
+  {% include "order.html" %} {% endcomment %}
+
+  {% block content %}
+
+  {% endblock %}
+
+
+
+    
+
+  </body>
+</html>
+  

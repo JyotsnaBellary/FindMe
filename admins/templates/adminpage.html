@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Srima Shetty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+       {% comment %} <img src = {% static 'static/img/loginlogout.png' %} alt='logo.jpg'>  {% endcomment %}
+       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css'><link rel="stylesheet" href={% static 'static/css/admin.css' %}>
+       <style>
+       *{
+        margin: 0;
+        padding: 0;
+    
+    }
+    
+    
+    body{
+        background-color: whitesmoke;
+        font-family: sans-serif
+    }
+    .navbar{
+        max-height: 80px;
+        max-width: 100%;
+    }
+    .form-inline{
+        /* margin: -10px 10px 0px 2px; */
+        display: flex;
+    }
+    .form-control{
+        min-width: 500px;
+        margin: 3px 5px 0px 0px;
+    }
+    
+    .navbar-brand{
+        padding: 2px 20px 1px 20px;
+    }
+    
+    .username{
+        color: aliceblue;
+        font-size: 20px;
+        margin-right: 4%;
+    }
+    
+    
+    
+      .username{
+          margin-right: 4%;
+      }
+      
+     .topnav .icon {
+      display: none;
+    }
+    
+    
+      @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child) {display: none;}
+        .topnav a.icon {
+            float: right;
+            display: block;
+            margin-right: -50%;
+        }
+    
+        }
+    
+        @media screen and (max-width: 992px) {
+            body {
+                background-color: blue;
+            }
+        }
+    
+        @media screen and (max-width: 600px) {
+    
+            body {
+                background-color: black;
+            }
+            .topnav.responsive {position: relative;}
+            .topnav .responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            #search{
+                display: block;
+                width: 10%;
+                float: left;
+                margin-right: 0%;
+            }
+            .topnav .responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+                
+            }
+           
+            .navbar-brand{
+                display: block;
+                padding: 0px 0px 0px 0px;
+                size: 10px;
+            }
+        }
+    
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            width:110px;
+            font-size: 16px;
+            border: none;
+          }
+          
+          .username {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+          }
+          
+          .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size:13px;
+          }
+          
+          .dropdown-content a:hover {background-color: #ddd;}
+          
+          .username:hover .dropdown-content {display: block;}
+          
+          .username:hover .dropbtn {background-color: #3e8e41;}
+        </style>
+      </head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="md:flex">
+  <!-- content -->
+  <div class="flex-1 flex-col flex">
+    <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+      </a>
+    <a class="navbar-brand"><h1 style="font-size:40px;">Find<span style="color: #198754;">Me</span></h1></a>
+    {% comment %} <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+    </form> {% endcomment %}
+    <div class="username">
+        <button class="dropbtn">{{ username }}</button>
+        {% comment %} <div class="dropdown-content" style= "z-index: 9;">
+          <a href="{% url 'my_orders' %}">My Orders</a>
+          <a href="{% url 'edit_profile' %}">Edit Profile</a>
+          <a href="#">Logout</a>
+        </div> {% endcomment %}
+  </div>
+  </nav>
+
+    <main class="bg-[#f3f3f9] mb-auto flex-grow">
+      <div class="border-b bg-white border-gray-300 pl-6 py-2 shadow-sm  text-xl font-bold">
+        PROFILE REQUESTS
+      </div>
+      <div>
+        <!-- -->
+        <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+          <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+            {% if Not_Verified %}
+            {% for profile in Not_Verified %}
+            <form id="form_submit" action="{% url 'adminpage' %}" method="POST" >
+              {% csrf_token %}
+              <div>
+                <div>
+                  <a href="#">
+                    <img style="height:200px; width:400px; padding:2%;" src = "{{ profile.company_logo.url }}" alt='Company Logo'>
+                  </a>
+
+                  <div class="card-body">
+                      <h4 class="card-title">Company Name:{{ profile.company_name }}</h4>
+                      <h5>Name: {{ profile.Person_name }}</h5>
+                      <h5>Company Name:</h5>
+                      <h5>Email:<input name="email" value="{{ profile.email }}"></h5>
+                      <h5>Whatsapp_no:<input name="number" value="{{ profile.whatsapp_no }}"></h5>
+            
+                      <div class="d-grid gap-2 my-4">
+                        {% comment %} <a href="#" class="btn btn-success bold-btn">Accept</a> {% endcomment %}
+                        <input type="submit" name="Accept" value="Accept" class="btn btn-success bold-btn" style="color:white; background:green;">
+                        <input type="submit" name="Reject" value="Reject" class="btn btn-danger bold-btn" style="color:white; background:red;">
+                        {% comment %} <a href="#" class="btn btn-danger bold-btn">Reject</a> {% endcomment %}
+            
+                      </div>
+                    {% comment %} <div class="clearfix mb-1">
+          
+                      <span class="float-start">svhd<a href="#"><i class="fas fa-question-circle"></i></a></span>
+          
+                      <span class="float-end">
+                        <i class="far fa-heart" style="cursor: pointer"></i>
+          
+                      </span>
+                    </div> {% endcomment %}
+                  </div>
+                </div>
+              </div>
+            </form>
+            {%endfor%}
+            {%endif%}
+          </div>
+        </div>
+        <div class="bg-gray-100 min-h-screen"></div>
+        <div class="bg-gray-100 min-h-screen"></div>
+      </div>
+    </main>
+    <footer class="border-t p-4 pb-3 text-xs bg-gray-100">
+    </footer>
+  </div>
+
+</div>
+<!-- partial -->
+  <script src='https://cdn.tailwindcss.com'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.9.1/cdn.js'></script>
+</body>
+</html>

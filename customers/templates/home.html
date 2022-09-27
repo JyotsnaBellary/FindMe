@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>HomePage</title>
+  <link rel='stylesheet' href='https://unpkg.com/fullpage.js/dist/fullpage.min.css'>
+  {% comment %} <link rel="stylesheet" href="./style.css"> {% endcomment %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/3cc21c4012.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/home.css' %}">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="fullpage">
+    <div class="section">
+      <div class="left">
+        <div class="top">
+          <div class="logo"><img src = {% static 'static/img/logos.jpeg' %} alt='logos.jpeg'></div>
+          <div class="buttons">
+            <a href="{% url 'signin' %}" id="btn1">Login</a>
+            <a href="{% url 'signup' %}" id="btn2">Sign up</a>
+          {% comment %} <a style="text-decoration: none; background-color: #198754 ; color: white; margin-right: 3%; width: 100%; height: 100%;" href="{% url 'signup' %}" ><button class="btn2" type="submit" >Login</button></a> {% endcomment %}
+
+          </div>
+        </div>
+      <div class="text">
+          <h1 id="text-head">Grow your business as a vendor</h1>
+          <p>Sign up or log in now to get started</p>
+      </div>
+      <div class="bottom">
+          <h4>POPULAR CITIES IN INDIA</h4>
+          <ul>
+              <li><a href="#">Ahmedabad</a></li>
+              <li><a href="#">Bangalore</a></li>
+              <li><a href="#">Chennai</a></li>
+              <li><a href="#">Delhi</a></li>
+              <li><a href="#">Gurgaon</a></li>
+              <li><a href="#">Hyderabad</a></li>
+              <li><a href="#">Kolkata</a></li>
+              <li><a href="#">Mumbai</a></li>
+              <li><a href="#">Pune</a></li>
+              <li><a href="#">& more.</a></li>
+              
+          </ul>
+      </div>
+      </div> 
+    </div>
+    <div class="section">
+      <div id = 'stopText'>
+        <h4>
+          Get your orders delivered to your doorstep. 
+        </h4>
+      </div>
+      <div class='divs' id='stop'>
+        <div style="float: left; width: 38%;" id="first"></div>
+        <div style="float: right; width: 38%;" id="second">
+          <img src = {% static 'static/img/delivered.gif' %}  width="100%" height="100%" alt='logo.jpg'> 
+
+        </div>
+      </div>
+    </div>
+    <div  class="section" id="third">
+      <div class="fun-box">
+        <img src = {% static 'static/img/sell-icon-png-5.png' %} width="105" height="199" alt='logo.jpg'> 
+
+        <h4>Sell Extraordinarily</h4>
+        <p>With NO fees we help creative entrepreneurs start, manage, and scale their businesses. Want to become an FindMe seller? All you have to do is sign up to get started.</p>
+      </div>
+      <div class="fun-box">
+       <img src = {% static 'static/img/icon-buy-4.png' %} alt='logo.jpg' width="112" height="206"> 
+
+        <h4>Buy extraordinary</h4>
+        <p>From the specific to the unexpected (or custom-made), our search tools help buyers explore all the special one-of-a-kind items offered by FindMe sellers. </p>
+      </div>
+      <div class="fun-box">
+       <img src = {% static 'static/img/small-business-icon-png-20.png' %}  width="124" height="188" alt='logo.jpg'> 
+
+        <h4>Support Small Businesses</h4>
+        <p>FindMe is a marketplace for unique and creative goods. It’s home to a universe of special, extraordinary items, from unique handcrafted pieces to blue collared services.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="app">
+        <div class="app-text">
+            <h1>Shop Securely</h1>
+            <p>We provide the technology behind the FindMe marketplace, helping buyers and sellers connect and exchange on FindMe. Keeping those connections safe, fun and secure is our priority.</p>
+        </div>
+        <div class="app-image">
+       <img src = {% static 'static/img/text.jpg' %} height="489" width="384" alt='logo.jpg'> 
+            <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/iPhone_wgconp_j0d1fn" height="489" width="384">
+        </div>
+        
+    </div>
+    <footer>
+        <div class="points">
+        COMPANY
+        <ul class="footer-ul">
+                <li class="footer-li"><a href="#">About us</a>
+                <li class="footer-li"><a href="#">Team</a>
+                <li class="footer-li"><a href="#">Careers</a>
+                <li class="footer-li"><a href="#">Swiggy Blog</a>
+                <li class="footer-li"><a href="#">Bug Bounty</a>
+                <li class="footer-li"><a href="#">Swiggy Super</a>
+                <li class="footer-li"><a href="#">Swiggy Corporate</a>
+                <li class="footer-li"><a href="#">Swiggy Instamart</a>                
+            </ul>
+        </div>
+        <div class="points">
+            CONTACT
+            <ul class="footer-ul">
+                <li class="footer-li"><a href="#">Help & Support</a>
+                <li class="footer-li"><a href="#">Partner with us</a>
+                <li class="footer-li"><a href="#">Ride with us</a>
+            </ul>
+            
+        </div>
+        <div class="points">
+        LEGAL
+        <ul class="footer-ul">
+                <li class="footer-li"><a href="#">Terms & Conditions</a>
+                <li class="footer-li"><a href="#">Refund & Cancellation</a>
+                <li class="footer-li"><a href="#">Privacy Policy</a>
+           <li class="footer-li"><a href="#">Cookie Policy</a>
+           <li class="footer-li"><a href="#">Offer Terms</a>
+           <li class="footer-li"><a href="#">Phishing & Fraud</a>
+           
+            </ul>
+        </div>        
+    </footer> 
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/fullpage.js/dist/fullpage.min.js'></script>
+  <script>
+    new fullpage('#fullpage', {
+  licenseKey: 'YOUR KEY HERE',
+  sectionsColor: ['white', 'orange', '#2B1E16', 'white'],
+  navigation: true
+});
+  </script>
+
+</body>
+</html>

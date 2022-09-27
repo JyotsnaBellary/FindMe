@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/customers/bootstrap-5/css/style.css"/>
+    <title>FindMe</title>
+    <style>
+        
+.body{
+    background:#ccc;
+
+}
+.navbar{
+    max-height: 80px;
+    max-width: 100%;
+}
+.form-inline{
+    /* margin: -10px 10px 0px 2px; */
+    display: flex;
+}
+.form-control{
+    min-width: 500px;
+    margin: 3px 5px 0px 0px;
+}
+
+.navbar-brand{
+    padding: 2px 20px 1px 20px;
+}
+
+.username{
+    color: aliceblue;
+    font-size: 20px;
+    margin-right: 4%;
+}
+
+.column {
+    float: left;
+    margin: 1%;
+    padding: 2%;
+    border-radius: 2%;
+    background-color: white ;
+
+    /* -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; */
+    
+        box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
+                    0 2px 4px rgba(0,0,0,0.07), 
+                    0 4px 8px rgba(0,0,0,0.07), 
+                    0 8px 16px rgba(0,0,0,0.07),
+                    0 16px 32px rgba(0,0,0,0.07), 
+                    0 32px 64px rgba(0,0,0,0.07);
+  }
+
+  .left, .right {
+    width: 23%;
+    padding: 1%;
+  }
+  .right{
+       margin-right: .5% ;
+       margin-left: .5%;
+  }
+  .left{
+      margin-left: 1.5%;
+  }
+  
+  .middle {
+    width: 47%;
+    padding: 1%;
+    height: 100%;
+    background-color: none;
+    
+  }
+
+  div .menu-item{
+    list-style: none;
+    padding: 4%;
+  }
+
+  .menu-item-sub{
+    list-style: none;
+    padding: 4%;
+  }
+  .side-menu{
+    overflow-y: auto;
+    height: relative;
+    max-height: 582px;
+  }
+
+  .dropdown-content {
+        display: none;
+        position: relative;
+        width: 100%;
+        
+    }
+
+    ul .dropdown-content li {
+        height: 10px;
+    }
+
+    .menu-item-sub:hover {background-color: #212529; color:#ccc;}
+
+    .dropdown:hover .dropdown-content {display: block;}
+
+  .column-middle {
+    width: 47%;
+    padding: 1%;
+    height: 100%;
+    background-color: none;
+    box-shadow: none
+  }
+  .card-column{
+    width: 32%;
+    margin: .5%;
+}
+  .card{
+      margin: 5%;
+      width: 100%;
+      height: 40%;
+  }
+  .card-body{
+    text-align: center;
+    padding: 1%;
+  }
+
+  .username{
+      margin-right: 4%;
+  }
+  
+ .topnav .icon {
+  display: none;
+}
+
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+        margin-right: -50%;
+    }
+
+    }
+
+    @media screen and (max-width: 992px) {
+        body {
+            background-color: blue;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        body {
+            background-color: black;
+        }
+        .topnav.responsive {position: relative;}
+        .topnav .responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #search{
+            display: block;
+            width: 10%;
+            float: left;
+            margin-right: 0%;
+        }
+        .topnav .responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+            
+        }
+        .main .left {
+            display: none;
+
+        }
+        .navbar-brand{
+            display: block;
+            padding: 0px 0px 0px 0px;
+            size: 10px;
+        }
+        .right{
+            display: none;
+        }
+        .card-column{
+            width: 32%;
+            margin: .5%;
+        }
+        .card{
+            margin: 5%;
+            width: 100%;
+            height: 40%;
+        }
+        .card-body{
+            text-align: center;
+            padding: 1%;
+        }
+
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        width:110px;
+        font-size: 16px;
+        border: none;
+      }
+      
+      .username {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-size:13px;
+      }
+      
+      .dropdown-content a:hover {background-color: #ddd;}
+      
+      .username:hover .dropdown-content {display: block;}
+      
+      .username:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+
+    <script>
+        function hideMenu() {
+                    document.getElementById('dropdown-menu').style.display = 'block';
+        }
+    </script>
+
+<script type="text/javascript">  
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    function myFunction() {
+        if (document.getElementById("dropdown-content").style.display = 'none'){
+            document.getElementById("dropdown-content").style.display = 'block';
+            element.classList.add("fa-angle-down");
+            element.classList.remove("fa-angle-right");
+        }
+        else if (document.getElementById("dropdown-content").style.display = 'block'){
+            document.getElementById("dropdown-content").style.display = 'none';
+        }
+    }
+
+    </script>
+  </head>
+  {% csrf_token %}
+
+  <body>
+    <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+      <a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+      <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      </form>
+      <div class="username">
+          <button class="dropbtn">{{ username }}</button>
+          <div class="dropdown-content">
+            <a href="#">My Orders</a>
+            <a href="#">Edit Profile</a>
+            <a href="#">Logout</a>
+          </div>
+    </div>
+    </nav>
+    <div class="main w-100 p-3">
+        <div class="column left side-menu">
+            <div class="dropdown menu-item border-bottom text-center">Clothess &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <a href="{% url 'catagery' name='dress' %}"><li class="dropdown-content menu-item-sub border-bottom text-center">dresses</li></a>
+                    <a href="{% url 'catagery' name='jeans' %}"><li class="dropdown-content menu-item-sub border-bottom text-center">jeans</li></a>
+                    <a href="{% url 'catagery' name='tops' %}"><li class="dropdown-content menu-item-sub border-bottom text-center">tops</li></a>
+                    <a href="{% url 'catagery' name='skirt' %}"><li class="dropdown-content menu-item-sub border-bottom text-center">skirtss</li></a>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Footwares &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">shoes</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">sandals</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">heels</li>
+                    <li class="dropdown-content menu-item-sub text-center">flats</li>
+                </ul>
+                </div>
+            <div class="dropdown menu-item border-bottom text-center">Mobiles &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+            <ul class="dropdown-content">
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">iphone</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">poco</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">redmi</li>
+                <li class="dropdown-content menu-item-sub text-center">vivo</li>
+            </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Computers &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+            <ul class="dropdown-content">
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">laptops</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">hard disks</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">pendrives</li>
+                <li class="dropdown-content menu-item-sub text-center">desktop</li>
+            </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Books &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+            <ul class="dropdown-content">
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">revolution 2020</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">one indian girl</li>
+                <li class="dropdown-content menu-item-sub  border-bottom text-center">wings of fire</li>
+                <li class="dropdown-content menu-item-sub text-center">kite runner</li>
+            </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Fintness &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">dumbels</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">gym rope</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">skipping rope</li>
+                    <li class="dropdown-content menu-item-sub text-center">tummy twister</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Baby Care Products &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">organic oil</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">waterproof bedspreads</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">toddlers mattress</li>
+                    <li class="dropdown-content menu-item-sub text-center">himalaya baby shampoo</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Magzines &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">everyday vocabulary</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">english manorama</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">cosmopolitian</li>
+                    <li class="dropdown-content menu-item-sub text-center">vogue</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Home Appliances &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">hand chopper</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">scoth-brite</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">fridge space saver</li>
+                    <li class="dropdown-content menu-item-sub text-center">oven</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Movies and Music &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">dil bechara</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">kal ho na ho</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">mein hoo na</li>
+                    <li class="dropdown-content menu-item-sub text-center">dilwale</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Auto Accessories &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">earrings</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">hair bands</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">chains</li>
+                    <li class="dropdown-content menu-item-sub text-center">lipstics</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item border-bottom text-center">Games &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">uno cards</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">carrom board</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">chess</li>
+                    <li class="dropdown-content menu-item-sub text-center">badmiton</li>
+                </ul>
+            </div>
+            <div class="dropdown menu-item  text-center">Grocery &nbsp; &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+                <ul class="dropdown-content">
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">rice</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">wheat flour</li>
+                    <li class="dropdown-content menu-item-sub  border-bottom text-center">bread</li>
+                    <li class="dropdown-content menu-item-sub text-center">vegetables</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="column column-middle">
+        <div class="row">
+            <div class="card-column">
+                <div class="card">
+                    <div class="card-body">
+                    left
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    left
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    left
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    left
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    left
+                    </div>
+                </div>
+            </div>
+            <div class="card-column">
+                <div class="card">
+                    <div class="card-body">
+                    middle
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    middle
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    middle
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    middle
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    middle
+                    </div>
+                </div>
+            </div>
+            <div class="card-column">
+                <div class="card">
+                    <div class="card-body">
+                    right
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    right
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    right
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    right
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                    right
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column right" >aeff</div>
+    
+    </div>
+  </body>
+</html>

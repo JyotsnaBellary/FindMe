@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Register Company</title>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body class="antialiased sans-serif bg-gray-200">
+	<div x-data="app()" x-cloak>
+		<div class="max-w-3xl mx-auto px-4 py-10">
+
+			<div x-show.transition="step === 'complete'">
+				<div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
+					<div>
+						<svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+
+						<h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
+
+						<div class="text-gray-600 mb-8">
+							Thank you. We have notified the admin. You will receive a response within 48 hours. 
+						</div>
+
+						<button
+							@click="step = 1"
+							class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
+						>Back to home</button>
+					</div>
+				</div>
+			</div>
+
+			<div x-show.transition="step != 'complete'">	
+				<!-- Top Navigation -->
+				<div class="border-b-2 py-4">
+					<div class="uppercase tracking-wide text-xs font-bold text-gray-500 mb-1 leading-tight" x-text="`Step: ${step} of 4`"></div>
+					<div class="flex flex-col md:flex-row md:items-center md:justify-between">
+						<div class="flex-1">
+							<div x-show="step === 1">
+								<div class="text-lg font-bold text-gray-700 leading-tight">Contact Information</div>
+							</div>
+							
+							<div x-show="step === 2">
+								<div class="text-lg font-bold text-gray-700 leading-tight">Additional Contact Information</div>
+							</div>
+
+							<div x-show="step === 3">
+								<div class="text-lg font-bold text-gray-700 leading-tight">Company Details</div>
+							</div>
+
+							<div x-show="step === 4">
+								<div class="text-lg font-bold text-gray-700 leading-tight"> Address</div>
+							</div>
+						</div>
+
+						<div class="flex items-center md:w-64">
+							<div class="w-full bg-white rounded-full mr-2">
+								<div class="rounded-full bg-green-500 text-xs leading-none h-2 text-center text-white" :style="'width: '+ parseInt(step / 4 * 100) +'%'"></div>
+							</div>
+							<div class="text-xs w-10 text-gray-600" x-text="parseInt(step / 4 * 100) +'%'"></div>
+						</div>
+					</div>
+				</div>
+				<!-- /Top Navigation -->
+
+				<!-- Step Content -->
+        <form id="form_submit" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+				<div class="py-10">	
+					<div x-show.transition.in="step === 1">
+						<div class="mb-5 text-center">
+							<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
+								<img id="image" class="object-cover w-full h-32 rounded-full" :src="image" />
+							</div>
+							
+							<label 
+								for="fileInput"
+								type="button"
+								class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+									<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+									<circle cx="12" cy="13" r="3" />
+								</svg>						
+								Browse Photo
+							</label>
+
+							<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-1">Click to add profile picture</div>
+
+							<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" @change="let file = document.getElementById('fileInput').files[0]; 
+								var reader = new FileReader();
+								reader.onload = (e) => image = e.target.result;
+								reader.readAsDataURL(file);">
+						</div>
+
+						<div class="mb-5">
+							<label for="name" class="font-bold mb-1 text-gray-700 block">Contact Person Name</label>
+							<input type="text" name="Person_name" id="Person_name"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your full name...">
+						</div>
+
+						<div class="mb-5">
+							<label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>
+							<input type="email" name="emails" id="emails" 
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your email address...">
+						</div>
+
+						<div class="mb-5">
+							<label for="Designation" class="font-bold mb-1 text-gray-700 block">Designation</label>
+							<input type="text" name="designation" id="designation" 
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your designation...">
+						</div>
+
+						<div class="mb-5">
+							<label for="Mobile Number" class="font-bold mb-1 text-gray-700 block">Mobile Number</label>
+							<input type="number" name="mobile_no" id="mobile_no"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your mobile number...">
+						</div>
+
+						<div class="mb-5">
+							<label for="altNum" class="font-bold mb-1 text-gray-700 block">Alternate Number</label>
+							<input type="number" name="alternate_no" id="alternate_no"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your alt number...">
+						</div>
+
+					</div>
+					<div x-show.transition.in="step === 2">
+
+						
+
+					</div>
+					<div x-show.transition.in="step === 3">
+            <div class="mb-5 text-center">
+							<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
+								<img id="logo" class="object-cover w-full h-32 rounded-full" :src="logo" />
+							</div>
+							
+							<label 
+								for="fileInput1"
+								type="button"
+								class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+									<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+									<circle cx="12" cy="13" r="3" />
+								</svg>						
+								Browse Photo
+							</label>
+
+							<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-1">Click to add company logo</div>
+
+							<input name="company_photo" id="fileInput1" accept="image/*" class="hidden" type="file" @change="let file1 = document.getElementById('fileInput1').files[0]; 
+								var reader = new FileReader();
+								reader.onload = (e) => logo = e.target.result;
+								reader.readAsDataURL(file1);">
+						</div>
+
+						<div class="mb-5">
+							<label for="compName" class="font-bold mb-1 text-gray-700 block">Company Name</label>
+							<input type="text" name="company_name" id="company_name"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your company name...">
+						</div>
+
+						<div class="mb-5">
+							<label for="estYear" class="font-bold mb-1 text-gray-700 block">Year of Establishment</label>
+							<input type="text" name="year_established" id="year_established"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the Year of Establishment...">
+						</div>
+
+						<div class="mb-5">
+							<label for="ceoName" class="font-bold mb-1 text-gray-700 block">Name of CEO</label>
+							<input type="text" name="ceo_name" id="ceo_name"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter CEO's name...">
+						</div>
+
+						<div class="mb-5">
+							<label for="websiteUrl" class="font-bold mb-1 text-gray-700 block">Website URL</label>
+							<input type="url" name="website" id="website"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter website URL...">
+						</div>
+
+						<div class="mb-5">
+							<label for="name" class="font-bold mb-1 text-gray-700 block">Contact Person Name</label>
+							<input type="text" 
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter your full name...">
+						</div>
+
+					</div>
+					
+
+						
+
+						
+					</div>
+
+					<div x-show.transition.in="step === 4"> 
+            <div class="mb-5">
+							<label for="addL1" class="font-bold mb-1 text-gray-700 block">Address Line 1</label>
+							<input type="text" name="address_line1" id="address_line1"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the address...">
+						</div>
+
+						<div class="mb-5">
+							<label for="addL2" class="font-bold mb-1 text-gray-700 block">Address Line 2</label>
+							<input type="text" name="address_line2" id="address_line2"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the address...">
+						</div>
+
+						<div class="mb-5">
+							<label for="pinCode" class="font-bold mb-1 text-gray-700 block">Pin Code</label>
+							<input type="number" name="pincode" id="pincode"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the pin code...">
+						</div>
+
+						<div class="mb-5">
+							<label for="city" class="font-bold mb-1 text-gray-700 block">City</label>
+							<input type="text" name="city" id="city"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the city...">
+						</div>
+
+						<div class="mb-5">
+							<label for="state" class="font-bold mb-1 text-gray-700 block">State</label>
+							<input type="text" name="state" id="state"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the state...">
+						</div>
+
+						<div class="mb-5">
+							<label for="country" class="font-bold mb-1 text-gray-700 block">Country</label>
+							<input type="text" name="country" id="country"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the country...">
+						</div>
+
+						<div class="mb-5">
+							<label for="landmark" class="font-bold mb-1 text-gray-700 block">Landmark</label>
+							<input type="text" name="landmark" id="landmark"
+								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+								placeholder="Enter the landmark...">
+						</div>
+						
+						
+				</div>
+				<!-- / Step Content -->
+			</div>
+  
+		</div>
+  </form>
+		<!-- Bottom Navigation -->	
+		<div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
+			<div class="max-w-3xl mx-auto px-4">
+				<div class="flex justify-between">
+					<div class="w-1/2">
+						<button
+							x-show="step > 1"
+							@click="step--"
+							class="w-32 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
+						>Previous</button>
+					</div>
+
+					<div class="w-1/2 text-right">
+						<button
+							x-show="step < 4"
+							@click="step++"
+							class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+						>Next</button>
+             
+            <button  onclick="submit()"
+            @click="step = 'complete'"
+            x-show="step === 4"
+            class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+          >Complete</button>
+            
+					</div>
+				</div>
+			</div>
+		</div>
+  
+		<!-- / Bottom Navigation https://placehold.co/300x300/e2e8f0/cccccc -->	
+	</div>
+
+	<script>
+		function app() {
+			return {
+				step: 1, 
+				passwordStrengthText: '',
+				togglePassword: false,
+
+				image: 'image.jpeg',
+				logo: 'logo.jpg',
+				gender: 'Male',
+
+			}
+		}
+	</script>
+  <script>
+    function submit(){
+      let form=document.getElementById("form_submit");
+      form.submit();
+    }
+  </script>
+</body>
+<!-- partial -->
+<!-- <script type="text/javascript">
+  $(document).on('submit', '#post-form', function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url:'',
+      data:{
+        name:$('#name').val(),
+        emails=request.POST['emails']
+        desg=request.POST['designation']
+        mobile_no=request.POST['mobile_no']
+        alter_no=request.POST['alternate_no']
+        company_name=request.POST['company_name']
+        year_established=request.POST['year_established']
+        company_ceo=request.POST['ceo_name']
+        website=request.POST['website']
+        address_l1=request.POST['address_line1']
+        address_l2=request.POST['address_line2']
+        pincode=request.POST['pincode']
+        city=request.POST['city']
+        state=request.POST['state']
+        country=request.POST['country']
+        landmark=request.POST['landmark']
+      }
+    })
+  })
+</script> -->
+ 
+</body>
+</html>

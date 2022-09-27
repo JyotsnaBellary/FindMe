@@ -1,0 +1,175 @@
+from django.shortcuts import render, redirect
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import auth, messages
+import vendor.models
+from vendor.models import *
+from .models import *
+from django.http import HttpResponse
+from .forms import *
+
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+# Create your views here.
+def home(request):
+    return render(request, 'home.html')
+
+
+def activate(request):
+    return 
+
+# def Register(request):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             first_name = form.cleaned_data['first_name']
+#             last_name = form.cleaned_data['last_name']
+#             phone_number = form.cleaned_data['phone_number']
+#             email = form.cleaned_data['email']
+#             password = form.cleaned_data['password']
+#             username = email.split("@")[0]
+#             user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+#             user.phone_number = phone_number
+#             user.save()
+
+#             # Create a user profile
+#             profile = UserProfile()
+#             profile.user_id = user.id
+#             profile.profile_picture = 'default/default-user.png'
+#             profile.save()
+
+#             # USER ACTIVATION
+#             current_site = get_current_site(request)
+#             mail_subject = 'Please activate your account'
+#             message = render_to_string('accounts/account_verification_email.html', {
+#                 'user': user,
+#                 'domain': current_site,
+#                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#                 'token': default_token_generator.make_token(user),
+#             })
+#             to_email = email
+#             send_email = EmailMessage(mail_subject, message, to=[to_email])
+#             send_email.send()
+#             # messages.success(request, 'Thank you for registering with us. We have sent you a verification email to your email address [rathan.kumar@gmail.com]. Please verify it.')
+#             return redirect('/accounts/login/?command=verification&email='+email)
+#     else:
+#         form = RegistrationForm()
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'Register.html', context)
+
+
+# def Register(request):
+#     if request.method == "POST":
+#         name = request.POST['Name']
+#         email = request.POST['Email']
+#         password = request.POST['Password']
+#         re_password = request.POST['RePassword']
+#         if name != "" and email != "" and password != "" and re_password != "":
+#             if password == re_password:
+#                 try:
+#                     password = make_password(password)
+#                     saveprofile = register(username = name, email = email, password = password) 
+#                     saveprofile.save()
+#                     return render(request, 'login.html')
+#                 except Exception:
+#                     messages.error(request, "Username exists")
+#                     return render(request, 'Register.html')
+#             else:
+#                 error_str = "Error: Passwords don't match"
+#                 messages.error(request, error_str)
+#                 return render(request, 'Register.html')
+
+#         else:
+#             error_str = "Error: "
+#             if name == "":
+#                 error_str = error_str + '-Empty Name field! '
+#             if email == "":
+#                 error_str = error_str + '-Empty Empty field! '
+#             if password == "":
+#                 error_str = error_str + '-Empty Password field! '
+#             if re_password == "":
+#                 error_str = error_str + '-Please Re-enter Password! '
+#             messages.error(request, error_str)
+#             return render(request, 'Register.html')
+#     else:
+#         return render(request, 'Register.html')
+    
+def login(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+        if email != "" and password != "":
+            try:
+                customerInfo = register.objects.get(email = email)
+                flag = check_password(password, customerInfo.password)
+                # pass1 = customerInfo.password
+                # if pass1 == password:
+                if flag:
+                    request.session['customer'] = customerInfo.username
+                    response = redirect('/findme/main')
+                    return response
+                else:
+                    error_str = "Error: Incorrect Password"
+                    messages.error(request, error_str)
+                    return render(request, 'login.html')
+            except Exception:
+                    messages.error(request, "You haven't been registered yet!")
+                    return render(request, 'login.html')
+        else:
+            error_str = "Error: "
+            
+            if email == "":
+                error_str = error_str + '-Empty Empty field! '
+            if password == "":
+                error_str = error_str + '-Empty Password field! '
+            messages.error(request, error_str)
+            return render(request, 'login.html')
+    return render(request, 'login.html')
+
+def forgot(request):
+    return render(request, 'forgot.html')
+
+def main(request):
+    print('hello')
+    customer = request.session['customer']
+    return render(request, 'main.html', {'username': customer})
+
+def products(request):
+    customer = request.session['customer']
+    # if request.method == "POST":
+    #     search = request.POST.get('search')
+    #     numbers = items.objects.get(pk=1)
+        
+    #     return render(request, 'items.html', {'username': customer})
+    # else:
+    products = add_product.objects.all()
+    # print('rrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+    # print(products[0]['Price'])
+
+    return render(request, 'products.html', {'username': customer, 'products': products})
+
+def product(request):
+    product_id = request.POST['id']
+    print('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+    print(product_id, 'hello')
+    # print(request.session['id'])
+    customer = request.session['customer']
+    allinfo = add_product.objects.filter(product_id = 1).values()
+    print(allinfo)
+
+    return render(request, 'product.html', {'username': customer, 'allinfo':allinfo})
+    # try:
+    #     print('Hello')
+    #     print(request.session['customer'])
+    #     # customer = request.session['customer']
+    #     return render(request, 'product.html', {'username': customer})
+    # except Exception:
+    #     print('hey')
+    #     messages.error(request, "Please Login!")
+    #     return render(request, 'login.html')

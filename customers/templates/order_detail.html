@@ -1,0 +1,278 @@
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block content %} {% endcomment %}
+
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/customers/bootstrap-5/css/style.css"/>
+    <title>FindMe</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        
+        }
+        
+        
+        body{
+            background-color: whitesmoke;
+            font-family: sans-serif
+        }
+        .navbar{
+            max-height: 80px;
+            max-width: 100%;
+        }
+        .form-inline{
+            /* margin: -10px 10px 0px 2px; */
+            display: flex;
+        }
+        .form-control{
+            min-width: 500px;
+            margin: 3px 5px 0px 0px;
+        }
+        
+        .navbar-brand{
+            padding: 2px 20px 1px 20px;
+        }
+        
+        .username{
+            color: aliceblue;
+            font-size: 20px;
+            margin-right: 4%;
+        }
+        
+        
+        
+          .username{
+              margin-right: 4%;
+          }
+          
+         .topnav .icon {
+          display: none;
+        }
+        
+        
+          @media screen and (max-width: 600px) {
+            .topnav a:not(:first-child) {display: none;}
+            .topnav a.icon {
+                float: right;
+                display: block;
+                margin-right: -50%;
+            }
+        
+            }
+        
+            @media screen and (max-width: 992px) {
+                body {
+                    background-color: blue;
+                }
+            }
+        
+            @media screen and (max-width: 600px) {
+        
+                body {
+                    background-color: black;
+                }
+                .topnav.responsive {position: relative;}
+                .topnav .responsive .icon {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+                #search{
+                    display: block;
+                    width: 10%;
+                    float: left;
+                    margin-right: 0%;
+                }
+                .topnav .responsive a {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                    
+                }
+               
+                .navbar-brand{
+                    display: block;
+                    padding: 0px 0px 0px 0px;
+                    size: 10px;
+                }
+            }
+        
+            .dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                width:110px;
+                font-size: 16px;
+                border: none;
+              }
+              
+              .username {
+                position: relative;
+                display: inline-block;
+              }
+              
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+              }
+              
+              .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                font-size:13px;
+              }
+              
+              .dropdown-content a:hover {background-color: #ddd;}
+              
+              .username:hover .dropdown-content {display: block;}
+              
+              .username:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+</head> 
+<body>
+    <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <a class="navbar-brand" href="{% url 'main' %}"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+        {% comment %} <a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a> {% endcomment %}
+      <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      </form>
+      <div class="username">
+          <button class="dropbtn">{{ username }}</button>
+          <div class="dropdown-content">
+            <a href="{% url 'my_orders' %}">My Orders</a>
+            <a href="{% url 'cart' %}">My Cart</a>
+            <a href="{% url 'wishlist' %}">My wishlist</a>
+            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+          </div>
+    </div>
+    </nav>
+<div class="container" style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;">
+    <div class="row invoice row-printable">
+        <div class="col-md-12">
+            <!-- col-lg-12 start here -->
+            <div class="panel panel-default plain" id="dash_0">
+                <!-- Start .panel -->
+                <div class="panel-body p30">
+                    <div class="row">
+                        <!-- Start .row -->
+                        <div class="col-lg-6">
+                            <!-- col-lg-6 start here -->
+                            <h1>Find<span style="color: #198754;">Me</span></h1>
+                        </div>
+                        <!-- col-lg-6 end here -->
+                        <div class="col-lg-6">
+                            <!-- col-lg-6 start here -->
+                            <div class="invoice-from">
+                                <ul class="list-unstyled text-right">
+                                    <li><strong>Invoiced To</strong></li>
+                                    <li>{{order.full_name}}</li>
+                                    <li>{{order.full_address}}</li>
+                                    <li>{{order.city}}, {{order.state}}</li>
+                                    <li>{{order.country}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- col-lg-6 end here -->
+                        <div class="col-lg-12">
+                            <!-- col-lg-12 start here -->
+                            <div class="invoice-details mt25">
+                                <div class="well">
+                                    <ul class="list-unstyled mb0">
+                                        
+                                        <li><strong>Order</strong> #{{order.order_id}}</li>
+                                        <li><strong>Order Date:</strong> {{order.created_at}}</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="invoice-items">
+                                <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="per70 text-center">Products</th>
+                                                <th class="per5 text-center">Qty</th>
+                                                <th class="per25 text-center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for item in order_detail %}
+                                            <tr>
+                                                <td>{{item.product.product_name}}
+                                                  <p class="text-muted small">
+                                          					{% comment %} {% if item.variations.all %}
+                                          						{% for i in item.variations.all %}
+                                          							{{ i.variation_category | capfirst }} : {{ i.variation_value | capfirst }} <br>
+                                          						{% endfor %}
+                                          					{% endif %} {% endcomment %}
+                                          				</p>
+                                                </td>
+                                                <td class="text-center">{{item.quantity}}</td>
+                                                <td class="text-center">Rs.{{item.product_price}} USD</td>
+                                            </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2" class="text-right">Sub Total:</th>
+                                                <th class="text-center">Rs.{{subtotal}} USD</th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" class="text-right">Tax:</th>
+                                                <th class="text-center">Rs.{{order.tax}} USD</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th colspan="2" class="text-right">Grand Total:</th>
+                                                <th class="text-center">Rs.{{order.order_total}} USD</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="invoice-footer mt25">
+                                <p class="text-center">Thank you for shopping with us!</p>
+                            </div>
+                        </div>
+                        <!-- col-lg-12 end here -->
+                    </div>
+                    <!-- End .row -->
+                </div>
+            </div>
+            <!-- End .panel -->
+        </div>
+        <!-- col-lg-12 end here -->
+    </div>
+    </div>
+</body>
+

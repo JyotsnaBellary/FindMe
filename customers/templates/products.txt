@@ -1,0 +1,196 @@
+<!DOCTYPE html> {% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - A Pen by Srima Shetty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {% comment %} <img src={ % static 'static/img/loginlogout.png' %} alt='logo.jpg'> {% endcomment %}
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css'>
+    <link rel="stylesheet" href={% static 'static/css/products.css' %}>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="md:flex">
+        <!-- content -->
+        <div class="flex-1 flex-col flex">
+            <!-- Top navbar -->
+            {% comment %} <nav class="bg-gray-800 shadow-xl sticky w-full top-0 text-black z-50" x-data="{ mobilemenue: false }">
+                <div class="mx-auto ">
+                    <div class="flex items-stretch justify-between h-16">
+                        <header class=" h-[64px] py-2 shadow-lg px-4 md:sticky top-0 bg-gray-800 z-40">
+                            <!-- logo -->
+                            <a href="#" class="text-white flex items-center space-x-2 group hover:text-white">
+                                <div>
+                                    <svg class="h-8 w-8 transition-transform duration-300 group-hover:-rotate-45 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                </div>
+
+                                <div>
+                                    <span class="text-2xl font-extrabold">FindMe</span>
+                                    <span class="text-xs block">Admin Mangement</span>
+                                </div>
+                            </a>
+                        </header>
+
+                        <div class="flex items-center pl-6">
+                            <div class="hidden lg:block">
+                                <!-- Search -->
+                                <form action="" class="app-search" method="GET">
+                                    <div class="relative group ">
+                                        <input type="text" class="form-input rounded-md bg-gray-700 text-sm text-gray-300 pl-10 py-1.5 ml-5 border-transparent border-none outline-none focus:ring-0 focus:text-white transition-all duration-300 ease-in-out focus:w-60 w-48" placeholder="Search..."
+                                            autocomplete="off">
+                                        <span class="absolute left-44 bottom-2 text-gray-400 transition-all duration-300 ease-in-out group-focus-within:left-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex items-stretch">
+                            <!-- Profile Menu DT -->
+                            <div class="ml-4 flex md:ml-6 ">
+                                <div class="relative flex justify-center items-center mr-4">
+                                    <div class="bg-gray-700 block hover:text-white p-1 rounded-full text-gray-400">
+                                        <span class="sr-only">View notifications</span>
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Profile dropdown -->
+                                <div class="relative bg-gray-700 px-4 text-gray-400 hover:text-white text-sm cursor-pointer" x-data="{open: false}">
+                                    <div class="flex items-center min-h-full" @click="open = !open">
+
+                                        <div class="flex flex-col ml-4">
+                                            <span>{{ username }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div x-show="open" @click.away="open = false" class="origin-top-right absolute right-0 mt-0 min-w-full rounded-b-md shadow py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95"
+                                        x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95"
+                                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                        <a href="{% url 'adminlogin' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Signout</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav> {% endcomment %}
+            <!-- End Top navbar -->
+            <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+              <a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+              <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+              </form>
+              <div class="username"><p>{{ username }}</p></div>
+            </nav>
+            <main class="bg-[#f3f3f9] mb-auto flex-grow">
+                <div class="border-b bg-white border-gray-300 pl-6 py-2 shadow-sm  text-xl font-bold">
+                    PROFILE REQUESTS
+                </div>
+                <div>
+                    <!-- -->
+
+                    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+                        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+                            {% if products %} {% for product in products %} {%if product.product_id%}
+                            <form id="form_submit" action="{{ product.get_url }}" method="post" enctype="">
+                                {% csrf_token %}
+                                <a href="{{ product.get_url }}">
+                                <div class="col hp">
+                                    <div class="card h-100 shadow-sm">
+                                        {% if product.product_image %}
+                                        {% comment %} <div style="max-height:200px; max-width:200px; overflow:hidden; height:fit-content; width:fit-content"> {% endcomment %}
+                                        <img src="{{ product.product_image.url }}" alt='{{product.product_image}}'> {% endif %}
+                                        {% comment %} </div> {% endcomment %}
+                                        <div class="card-body">
+                                            <h4 class="card-title">Company Name:{{ product.product_name }}</h4>
+                                            <h5>Name: {{ product.Price }}</h5>
+                                            <h5>Company Name:</h5>
+                                            <h5>Email:<input name="email" value="{{ product.Description }}"></h5>
+                                            <input type="text" name="id" value="{{ product.product_id }}" style="display:none;">
+                                            </button>
+						                    <a href="{% url 'add_cart' product.product_id %}" class="btn  btn-primary"> <span class="text">Add to Cart</span> <i class="fa fa-shopping-cart"></i> </a>
+
+                                            <div class="d-grid gap-2 my-4">
+                                                <input type="submit" name="product" value="display" class="btn btn-success bold-btn" style="color:white; background:green;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </a>
+                            </form>
+                            {%endif%}{%endfor%} {%endif%}
+                        </div>
+                    </div>
+                    
+                    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+                    <div class="row g-3">
+                    {% if products %} {% for product in products %} {%if product.product_id%}
+                    <form id="form_submit" action="{{ product.get_url }}" method="post" enctype="">
+                        {% csrf_token %}
+                        <a href="{{ product.get_url }}">
+
+                        <div class="product-card ">
+                            <div class="card  z-depth-4">
+                                <div class="card-image">
+                                    <a href="#" class="btn-floating btn-large price waves-effect waves-light brown darken-3">Rs. {{ product.Price }}</a>
+                                    {% if product.product_image %}
+
+                                    <img src="{{ product.product_image.url }}" alt='{{product.product_image}}'> {% endif %}
+                                </div>
+                                <ul class="card-action-buttons">
+                                    <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://codepen.io/lybete/full/jBMNzM/" target="_blank" class="btn-floating waves-effect waves-light white"><i class="material-icons grey-text text-darken-3">share</i></a>
+                                    </li>
+                                    <li><a class="btn-floating waves-effect waves-light red accent-2"><i class="material-icons like">favorite_border</i></a>
+                                    </li>
+                                    <li><a id="buy" class="btn-floating waves-effect waves-light blue"><i class="material-icons buy">add_shopping_cart</i></a>
+                                    </li>
+                                </ul>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <p>
+                                                <strong>{{ product.product_name }}</strong> <br /> {{ product.product_name }}
+                                            </p>
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </form>
+                    {%endif%}{%endfor%} {%endif%}
+                    </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="border-t p-4 pb-3 text-xs bg-gray-100">
+            </footer>
+        </div>
+
+    </div>
+    <!-- partial -->
+    <script src='https://cdn.tailwindcss.com'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.9.1/cdn.js'></script>
+</body>
+
+</html>

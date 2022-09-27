@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+  <head>
+    <!-- {% load livereload_tags %}
+
+    {% livereload_script %} -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/customers/bootstrap-5/css/style.css"/>
+    <title>FindMe</title>
+    <style>
+        
+        .body{
+            background:#ccc;
+
+        }
+        section.nav{
+            /* padding-bottom: 100px; */
+            position: fixed;
+            background-color: coral;
+            max-width: 100%;
+            min-width: 100%;
+            
+        }
+        .navbar{
+            max-height: 80px;
+            max-width: 100%;
+            min-width: 100%;
+           
+            
+
+        }
+        .form-inline{
+            /* margin: -10px 10px 0px 2px; */
+            display: flex;
+        }
+        .form-control{
+            min-width: 500px;
+            margin: 3px 5px 0px 0px;
+        }
+
+        .navbar-brand{
+            padding: 2px 20px 1px 20px;
+        }
+
+        .username{
+            color: aliceblue;
+            font-size: 20px;
+            margin: 20px 20px 10px 10px;
+        }
+
+        div .menu-item{
+            list-style: none;
+            padding: 4%;
+        }
+
+        .menu-item-sub{
+            list-style: none;
+            padding: 4%;
+        }
+        .side-menu{
+            overflow-y: auto;
+            height: relative;
+            max-height: 582px;
+        }
+
+        section.Items{
+            background-color: aquamarine; 
+            /* background-color: #ccc;  */
+            min-height: auto; 
+            max-height: fit-content;
+            padding-top: 100px;
+            /* padding-bottom: 50px; */
+            padding-bottom: 4%;
+            
+        }
+        section.footer{
+            margin-top: 0;
+            padding: 1%;
+            background-color: palevioletred;
+            position:sticky;
+        }
+
+        .Products{
+            width: 100%;
+            /* background-color: aliceblue; */
+            margin-right: 15px;
+            margin-left: 15px;
+            display: inline-block; 
+            min-height: auto; 
+            max-height: 100%;  
+            position:fixed;
+            top: 120px;
+            overflow-y: scroll;
+            margin-bottom: 40%;
+            position: fixed;
+        }
+
+        .product-wrap{
+            background-color: #212529; 
+            height:3%; 
+            width: 350px; /*/270*/
+            margin: 60px;
+            float: left;
+            display: block;
+            
+        }
+
+        .product-top{
+            background-color: aqua; 
+            width: 100%; 
+            height: 300px;
+        }
+
+        .product-bottom{
+            background-color: cornsilk;
+        }
+
+        @media screen and (max-width: 992px) {
+            body {
+                background-color: blue;
+            
+            }
+            .product-wrap{
+            background-color: #212529; 
+            /* height:3%;  */
+            width: 350px;
+        }
+
+
+        }
+        @media screen and (max-width: 600px) {
+
+            .topnav a:not(:first-child) {
+                display: none;
+            }
+
+            .topnav a.icon {
+                float: right;
+                display: block;
+                margin-right: -50%;
+            }
+
+        }
+
+    @media screen and (max-width: 600px) {
+
+        .topnav.responsive {
+            position: relative;
+        }
+        .topnav .responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .search {
+            display: block;
+            width: 10px;
+            float: left;
+            margin-right: 0%;
+        }
+        .topnav .responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+            
+        }
+        
+        .navbar-brand{
+            display: block;
+            padding: 0px 0px 0px 0px;
+            size: 10px;
+        }
+        .right{
+            display: none;
+        }
+        .card-column{
+            width: 32%;
+            margin: .5%;
+        }
+        .card{
+            margin: 5%;
+            width: 100%;
+            height: 40%;
+        }
+        .card-body{
+            text-align: center;
+            padding: 1%;
+        }
+
+    }
+    </style>
+
+    <script>
+        function hideMenu() {
+                    document.getElementById('dropdown-menu').style.display = 'block';
+        }
+    </script>
+
+<script type="text/javascript">  
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    function myFunction() {
+        if (document.getElementById("dropdown-content").style.display = 'none'){
+            document.getElementById("dropdown-content").style.display = 'block';
+            element.classList.add("fa-angle-down");
+            element.classList.remove("fa-angle-right");
+        }
+        else if (document.getElementById("dropdown-content").style.display = 'block'){
+            document.getElementById("dropdown-content").style.display = 'none';
+        }
+    }
+
+    </script>
+  </head>
+  {% csrf_token %}
+
+  <body>
+    <section class="nav">
+        <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+            <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a> -->
+          {% comment %} <a href="/main" class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a> {% endcomment %}
+        <a class="navbar-brand" href="{% url 'main' %}"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+
+          <form class="form-inline search" method="POST" action="{% url 'items' %}">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <div class="username"><p>{{ username }}</p></div>
+        </nav>
+    </section>
+    
+    <section class="Items container vh-100 mw-100 p-5">
+        <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+            <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+              {% comment %} {% if Not_Verified %} {% endcomment %}
+              {% comment %} {% for profile in Not_Verified %} {% endcomment %}
+              <form id="form_submit" action="{% url 'adminpage' %}" method="post" enctype="">
+                {% csrf_token %}
+                <div class="col hp">
+                  <div class="card h-100 shadow-sm">
+                    <a href="#">
+                      {% comment %} <img style="height:200px; width:400px; padding:2%;" src = "{{ profile.company_logo.url }}" alt='Company Logo'> {% endcomment %}
+                    <img src = {% static 'static/img/logo.jpg' %} alt='logo.jpg'> 
+
+                    </a>
+  
+                    <div class="card-body">
+                        {% comment %} <h4 class="card-title">Company Name:{{ profile.company_name }}</h4>
+                        <h5>Name: {{ profile.Person_name }}</h5>
+                        <h5>Company Name:</h5>
+                        <h5>Email:<input name="email" value="{{ profile.email }}"></h5> {% endcomment %}
+
+                        <h4 class="card-title">Company Name:</h4>
+                        <h5>Name:</h5>
+                        <h5>Company Name:</h5>
+                        <h5>Email:<input name="email" value=""></h5>
+              
+                        <div class="d-grid gap-2 my-4">
+                          <input type="submit" name="Accept" value="Accept" class="btn btn-success bold-btn" style="color:white; background:green;">
+                          <input type="submit" name="Reject" value="Reject" class="btn btn-danger bold-btn" style="color:white; background:red;">
+              
+                        </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </form>
+              {% comment %} {%endfor%} {% endcomment %}
+              {% comment %} {%endif%} {% endcomment %}
+            </div>
+          </div>
+        {% comment %} {% if products %}
+        <div class="Products">
+           {%  for product in products  %} 
+            <div class="col-lg-4 p-3 m-2 product-wrap" onclick="window.location='/product';">
+                <div class="Product">
+                    <div class="product-top">
+                        {% if product.product_image %} {% endcomment %}
+
+                            {% comment %} <img src = "{{ product.product_image.url }}" alt='{{product.product_image}}'> {% endcomment %}
+                        {% comment %} {% endif %} {% endcomment %}
+                        <!-- <div class="overlay-right">
+                            <button type="button" class="btn btn-secondary" title="Quick Shop"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-secondary" title="Add to Whishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-secondary" title="Quick Shop"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                        </div> -->
+                    {% comment %} </div>
+                    <div class="product-bottom text-center">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                            <h3>craddel</h3>
+                            <h5>$150</h5>
+                    </div>
+                </div> {% endcomment %}
+            {% comment %} </div> {% endcomment %}
+            
+            {% comment %} {%endfor%} {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
+    </section>
+  </body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+    <title>FindMe</title>
+    <style>
+        
+        *{
+            margin: 0;
+            padding: 0;
+        
+        }
+        
+        
+        body{
+            background-color: whitesmoke;
+            font-family: sans-serif
+        }
+        .navbar{
+            max-height: 80px;
+            max-width: 100%;
+        }
+        .form-inline{
+            /* margin: -10px 10px 0px 2px; */
+            display: flex;
+        }
+        .form-control{
+            min-width: 500px;
+            margin: 3px 5px 0px 0px;
+        }
+        
+        .navbar-brand{
+            padding: 2px 20px 1px 20px;
+        }
+        
+        .username{
+            color: aliceblue;
+            font-size: 20px;
+            margin-right: 4%;
+        }
+        
+        
+        
+          .username{
+              margin-right: 4%;
+          }
+          
+         .topnav .icon {
+          display: none;
+        }
+        
+        
+          @media screen and (max-width: 600px) {
+            .topnav a:not(:first-child) {display: none;}
+            .topnav a.icon {
+                float: right;
+                display: block;
+                margin-right: -50%;
+            }
+        
+            }
+        
+            @media screen and (max-width: 992px) {
+                body {
+                    background-color: blue;
+                }
+            }
+        
+            @media screen and (max-width: 600px) {
+        
+                body {
+                    background-color: black;
+                }
+                .topnav.responsive {position: relative;}
+                .topnav .responsive .icon {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+                #search{
+                    display: block;
+                    width: 10%;
+                    float: left;
+                    margin-right: 0%;
+                }
+                .topnav .responsive a {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                    
+                }
+               
+                .navbar-brand{
+                    display: block;
+                    padding: 0px 0px 0px 0px;
+                    size: 10px;
+                }
+            }
+        
+            .dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                width:110px;
+                font-size: 16px;
+                border: none;
+              }
+              
+              .username {
+                position: relative;
+                display: inline-block;
+              }
+              
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+              }
+              
+              .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                font-size:13px;
+              }
+              
+              .dropdown-content a:hover {background-color: #ddd;}
+              
+              .username:hover .dropdown-content {display: block;}
+              
+              .username:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+
+    <script>
+        function hideMenu() {
+                    document.getElementById('dropdown-menu').style.display = 'block';
+        }
+    </script>
+
+<script type="text/javascript">  
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    function myFunction() {
+        if (document.getElementById("dropdown-content").style.display = 'none'){
+            document.getElementById("dropdown-content").style.display = 'block';
+            element.classList.add("fa-angle-down");
+            element.classList.remove("fa-angle-right");
+        }
+        else if (document.getElementById("dropdown-content").style.display = 'block'){
+            document.getElementById("dropdown-content").style.display = 'none';
+        }
+    }
+
+    </script>
+  </head>
+  {% csrf_token %}
+
+  <body>
+    <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <a class="navbar-brand" href="{% url 'main' %}"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+
+      {% comment %} <a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a> {% endcomment %}
+      <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      </form>
+      <div class="username">
+          <button class="dropbtn">{{ username }}</button>
+          <div class="dropdown-content">
+            <a href="{% url 'my_orders' %}">My Orders</a>
+            <a href="{% url 'cart' %}">My Cart</a>
+            <a href="{% url 'wishlist' %}">My wishlist</a>
+            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+          </div>
+    </div>
+    </nav>
+    {% comment %} {% comment %} <section class="section-content padding-y" >
+        <div class="container" > {% endcomment %} 
+        <!-- ============================ COMPONENT 1 ================================= -->
+            <div class="row p-5 m-5">
+                <aside class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Billing Address</h4>
+                            <form action="{% url 'place_order' %}" method="post">
+                                {% csrf_token %}
+                                
+                                <div class="form-row">
+                                    <div class="form-group col" style="margin-top: 2%;">
+                                        <label for="">First Name</label>
+                                        <input type="text" name="first_name" class="form-control" required>
+                                    </div>
+                                    <div class="col form-group" style="margin-top: 2%;">
+                                        <label for="">Last Name</label>
+                                        <input type="text" name="last_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">Email</label>
+                                    <input type="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">Phone Number</label>
+                                    <input type="text" name="phone" class="form-control" required>
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">Address Line 1</label>
+                                    <input type="text" name="address_line_1" class="form-control" required>
+                                </div>
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">Address Line 2</label>
+                                    <input type="text" name="address_line_2" class="form-control">
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">City</label>
+                                    <input type="text" name="city" class="form-control" required>
+                                </div>
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">State</label>
+                                    <input type="text" name="state" class="form-control" required>
+                                    {% comment %} <input name="password" type="password" id="Password" class="form-control" style="width: 100%;" required/> {% endcomment %}
+
+                                </div>
+                                <div class="col form-group" style="margin-top: 2%;">
+                                    <label for="">Country</label>
+                                    <input type="text" name="country" class="form-control" required>
+                                </div>
+                                </div>
+                                <div class="form-row" style="margin-top: 2%;">
+                                    <label for="">Order Note</label>
+                                    <textarea name="order_note" rows="2" class="form-control"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <input class="btn btn-primary btn-block" style="width: 20%;padding: 1%;margin-top: 5%;" type="submit" value="Place Order">
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div> <!-- card.// -->
+                  
+                </aside> <!-- col.// -->
+                <aside class="col-lg-6">
+
+                    <div class="card" style="border:none;">
+                        <div class="card-body p-4">
+                            <table class="table table-border table-shopping-cart">
+                                <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">Quantity</th>
+                                <th scope="col" width="120">Price</th>
+                                {% comment %} <th scope="col" class="text-right" width="200"> </th> {% endcomment %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cart_item in cart_items %}
+                                {% comment %} <p>{{ cart_item.quantity}}</p>
+                                <p>{{ cart_item.Description}}</p>
+                                <p>{{ cart_item.product_name}}</p> {% endcomment %}
+    
+                                <tr>
+                                    <td>
+                                        <figure class="itemside align-items-center">
+                                            <div class="aside">    
+                                                <img  height="100px" width = "100px" src="uploads/{{ cart_item.product_image }}" alt='{{cart_item.product_image}}'>  
+                                            </div>
+                                            <figcaption class="info">
+                                                <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product_name }}</a>
+                                                <p class="text-muted small">
+                                                    {% if cart_item.variations.all %}
+                                                        {% for item in cart_item.variations.all %}
+                                                            {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </p>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td>
+                                        <!-- col.// -->
+                                        <div class="col">
+                                            <div class="input-group input-spinner">
+                                                {% comment %} <div class="input-group-prepend"> {% endcomment %}
+                                                {% comment %} <a href="{% url 'remove_cart' cart_item.product_id %}" class="btn btn-light mr-2" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a> {% endcomment %}
+                                                {% comment %} <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a> {% endcomment %}
+                                                {% comment %} </div> {% endcomment %}<br><br>
+                                                {% comment %} <p>{{ cart_item.quantity }}</p> {% endcomment %}
+                                                <label for="">{{ cart_item.quantity }}</label>
+                                                {% comment %} <input type="text" class="form-control"  value="{{ cart_item.quantity }}"> {% endcomment %}
+                                                {% comment %} <div class="input-group-append"> {% endcomment %}
+                                                    {% comment %} <form action="{% url 'add_cart' cart_item.product.id %}" method="POST"> {% endcomment %}
+                                                        {% comment %} {% csrf_token %}
+                                                        {% for item in cart_item.variations.all %}
+                                                            <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
+                                                        {% endfor %} {% endcomment %}
+                                                        {% comment %} <a <a href="{% url 'add_cart' cart_item.product_id %}" class="btn btn-light" type="submit" id="button-minus"> <i class="fa fa-plus"></i> </a> {% endcomment %}
+                                                    {% comment %} </form> {% endcomment %}
+                                                {% comment %} </div> {% endcomment %}
+                                            </div> <!-- input-group.// -->
+                                        </div> <!-- col.// -->
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price"><b>Rs. {{ cart_item.sub_total }}</b></var><br>
+                                            <small class="text-muted"> Rs. {{ cart_item.Price }} each </small>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    {% comment %} <td class="text-right">
+                                    <a href="{% url 'remove_cart_item' cart_item.product_id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> Remove</a>
+                                    </td> {% endcomment %}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% comment %} <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Place Order </a> {% endcomment %}
+                            {% comment %} <a href="{% url 'place_order' %}" class="btn btn-primary btn-block">Place Order</a> {% endcomment %}
+                            
+                            <a href="{% url 'products' %}" class="btn btn-primary btn-block">Continue Shopping</a>
+                        </div> <!-- card-body.// -->
+                    </div> <!-- card.// -->
+            </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+        
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+        
+        {% comment %} </div> <!-- container .//  -->
+    </section> {% endcomment %}
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+  </body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>FindMe</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css'>
+  <script src="https://kit.fontawesome.com/63081e949a.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/customers/bootstrap-5/css/style.css"/>
+  {% comment %} <link rel="stylesheet" href={% static 'static/css/product.css' %}> {% endcomment %}
+<style>
+    .badge {
+        padding-left: 9px;
+        padding-right: 9px;
+        -webkit-border-radius: 9px;
+        -moz-border-radius: 9px;
+        border-radius: 9px;
+    }
+    
+    .label-warning[href],
+    .badge-warning[href] {
+        background-color: #c67605;
+    }
+    
+    #lblCartCount {
+        font-size: 12px;
+        background: #ff0000;
+        color: #fff;
+        padding: 0 5px;
+        vertical-align: top;
+        margin-left: -10px;
+    }
+    .rate > input{
+        display:none;
+    }
+    
+    .rate{
+        display:inline-block;
+        border:0;
+    }
+    
+    .rate > label{
+        float:right;
+    }
+    
+    /*showing stars*/
+    .rate > label:before{
+        display:inline-block;
+        font-size:1.1rem;
+        font-family:FontAwesome;
+        content:"\f005";
+        margin:0;
+        padding:0.3rem .2rem;
+        cursor:pointer;
+    
+    
+    }
+    /*half star*/
+    .rate .half:before{
+        content:"\f089";
+        position:absolute;
+        padding-right: 0;
+    
+    }
+    /*click and hover*/
+    input:checked ~ label, label:hover ~ label{
+        color:#ffb503;
+    }
+    
+    /*hover highlight*/
+    input:checked+label:hover, input:checked~label:hover, input:checked~label:hover ~label,
+    label:hover~input:checked~label{
+        color:#cc9000;
+    }
+    
+    .rating-star i{
+        color:#ffb503 !important;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    
+    }
+    
+    
+    body{
+        background-color: whitesmoke;
+        font-family: sans-serif
+    }
+    .navbar{
+        max-height: 80px;
+        max-width: 100%;
+    }
+    .form-inline{
+        /* margin: -10px 10px 0px 2px; */
+        display: flex;
+    }
+    .form-control{
+        min-width: 500px;
+        margin: 3px 5px 0px 0px;
+    }
+    
+    .navbar-brand{
+        padding: 2px 20px 1px 20px;
+    }
+    
+    .username{
+        color: aliceblue;
+        font-size: 20px;
+        margin-right: 4%;
+    }
+    
+    
+    
+      .username{
+          margin-right: 4%;
+      }
+      
+     .topnav .icon {
+      display: none;
+    }
+    
+    
+      @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child) {display: none;}
+        .topnav a.icon {
+            float: right;
+            display: block;
+            margin-right: -50%;
+        }
+    
+        }
+    
+        @media screen and (max-width: 992px) {
+            body {
+                background-color: blue;
+            }
+        }
+    
+        @media screen and (max-width: 600px) {
+    
+            body {
+                background-color: black;
+            }
+            .topnav.responsive {position: relative;}
+            .topnav .responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            #search{
+                display: block;
+                width: 10%;
+                float: left;
+                margin-right: 0%;
+            }
+            .topnav .responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+                
+            }
+           
+            .navbar-brand{
+                display: block;
+                padding: 0px 0px 0px 0px;
+                size: 10px;
+            }
+        }
+    
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            width:110px;
+            font-size: 16px;
+            border: none;
+          }
+          
+          .username {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+          }
+          
+          .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size:13px;
+          }
+          
+          .dropdown-content a:hover {background-color: #ddd;}
+          
+          .username:hover .dropdown-content {display: block;}
+          
+          .username:hover .dropbtn {background-color: #3e8e41;}
+</style>
+</head>
+<body>
+    <script>Rs.(".alert").alert('close')</script>
+<!-- partial:index.partial.html -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+<div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
+    <nav class="topnav navbar navbar-dark bg-dark justify-content-between">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <a class="navbar-brand" href="{% url 'main' %}"><h1>Find<span style="color: #198754;">Me</span></h1></a>
+        {% comment %} <a class="navbar-brand"><h1>Find<span style="color: #198754;">Me</span></h1></a> {% endcomment %}
+      <form id="search" class="form-inline" method="GET" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2 search" type="text" placeholder="Search" aria-label="Search" name="keyword" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      </form>
+      <div class="username">
+          <button class="dropbtn">{{ username }}</button>
+          <div class="dropdown-content">
+            <a href="{% url 'my_orders' %}">My Orders</a>
+        <a href="{% url 'cart' %}">My Cart</a>
+        <a href="{% url 'wishlist' %}">My wishlist</a>
+        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        <a href="{% url 'logout' %}">Logout</a>
+          </div>
+    </div>
+    </nav>
+    <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
+        <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
+            <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">
+                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <hr class="my-3">
+        <div class="flex justify-between mt-6">
+            <div class="flex">
+                {% comment %} <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt=""> {% endcomment %}
+                <div class="mx-3">
+                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <div class="flex items-center mt-2">
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                        <span class="text-gray-700 mx-2">2</span>
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <span class="text-gray-600">20Rs.</span>
+        </div>
+        <div class="flex justify-between mt-6">
+            <div class="flex">
+                <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
+                <div class="mx-3">
+                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <div class="flex items-center mt-2">
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                        <span class="text-gray-700 mx-2">2</span>
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <span class="text-gray-600">20Rs.</span>
+        </div>
+        <div class="flex justify-between mt-6">
+            <div class="flex">
+                <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
+                <div class="mx-3">
+                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <div class="flex items-center mt-2">
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                        <span class="text-gray-700 mx-2">2</span>
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <span class="text-gray-600">20Rs.</span>
+        </div>
+        <div class="mt-8">
+            <form class="flex items-center justify-center">
+                <input class="form-input w-48" type="text" placeholder="Add promocode">
+                <button class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                    <span>Apply</span>
+                </button>
+            </form>
+        </div>
+        <a class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+            <span>Chechout</span>
+            <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+    </div>
+    {% comment %} {% if product %} {% endcomment %}
+    <main class="my-8">
+        <div class="container mx-auto px-6">
+            <div class="md:flex md:items-center">
+                {% if product.product_image %}
+                <div >
+
+                        <img height="400px" width = "400px" src="{{ product.product_image.url }}" alt='{{product.product_image}}'> 
+                    
+                    {% comment %} <img class="h-full w-full rounded-md object-cover max-w-lg mx-auto" src="https://images.unsplash.com/photo-1578262825743-a4e402caab76?ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80" alt="Nike Air"> {% endcomment %}
+                </div>
+                {% endif %}
+                <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+                    <h3 class="text-gray-700 uppercase text-lg">{{product.product_name}}</h3>
+                    <span class="text-gray-500 mt-3">Rs {{product.Price}}</span>
+                    <hr class="my-3">
+                    <div class="mt-2">
+
+                        <p class="text-gray-700 text-lg" for="count">Business: {{product.vendor.company_name}}</p>
+                        <p class="text-gray-700 text-lg" for="count">Vendor: {{product.vendor.Person_name}}</p>
+    
+                    </div>
+                    <div class="mt-3">
+                        {% comment %} <label class="text-gray-700 text-sm" for="count">Color:</label>
+                        <div class="flex items-center mt-1">
+                            <input type="button" class="h-5 w-5 rounded-full bg-blue-600 border-2 border-blue-200 mr-2 focus:outline-none"></button>
+                            <button class="h-5 w-5 rounded-full bg-teal-600 mr-2 focus:outline-none"></button>
+                            <button class="h-5 w-5 rounded-full bg-pink-600 mr-2 focus:outline-none"></button>
+                        </div> {% endcomment %}
+                        <a href="https://api.whatsapp.com/send/?phone={{product.vendor.whatsapp_no}}&text=http://127.0.0.1:8000/findme{{product.get_url}}" class="btn  btn-success"> <span class="text">Whatsapp</span> <i class="fa fa-whatsapp" aria-hidden="true"></i> </a>
+
+                    </div>
+                    {% if product.stock >= 1 %}
+                        {%if in_cart%}
+                        <div class="flex items-center mt-6">
+                            <a href="{% url 'add_cart' product.product_id %}" class="btn  btn-success"> <span class="text">Added to Cart</span> <i class="fas fa-check"></i> </a> &nbsp;
+                            <a href="{% url 'add_cart' product.product_id %}" class="btn  btn-outline-primary"> <span class="text">View Cart</span> <i class="fas fa-eye"></i> </a>
+                        </div>
+                        {%else%}
+                        <div class="flex items-center mt-6">
+                            <a href="{% url 'add_cart' product.product_id %}" class="btn  btn-primary"> <span class="text">Add to Cart</span> <i class="fas fa-shopping-cart"></i> </a>
+                            {% comment %} <button class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button> {% endcomment %}
+                        </div>
+                        {%endif%}
+                    {%else%}
+                    <h5 class="text-danger">Out of stock</h5>
+                    {%endif%}
+                </div>
+            </div><br><br>
+
+            <div class="row">
+                <div class="col-md-9">
+                    
+                <form action="{% url 'submit_review' product.product_id%}" method="POST">
+                    {%csrf_token%}
+                    <h5>Write Your Review</h5>
+                    {{add_product.averageReview}}
+                    <div>
+                        <!---RatingStars-->
+                        <label>How do you rate this product?</label>
+                        <br>
+                        <div class="rate">
+                            <input type="radio" name="rating" id="rating10" value="5" required/><label for="rating10" title="5"></label>
+                            <input type="radio" name="rating" id="rating9" value="4.5" required/><label for="rating9" title="4.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating8" value="4" required/><label for="rating8" title="4" ></label>
+                            <input type="radio" name="rating" id="rating7" value="3.5" required/><label for="rating7" title="3.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating6" value="3" required/><label for="rating6" title="3" ></label>
+                            <input type="radio" name="rating" id="rating5" value="2.5" required/><label for="rating5" title="2.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating4" value="2" required/><label for="rating4" title="2" ></label>
+                            <input type="radio" name="rating" id="rating3" value="1.5" required/><label for="rating3" title="1.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating2" value="1" required/><label for="rating2" title="1" ></label>
+                            <input type="radio" name="rating" id="rating1" value="0.5" required/><label for="rating1" title="0.5" class="half"></label>
+                            
+
+                        </div><br>
+                        Review Title:
+                        <input type="text" class="form-control" name="subject" ><br>
+                        Review:
+                        <textarea name="review" class="form-control" rows="4" ></textarea><br>
+                        {%if orderproduct%}
+                        <input type="submit" value="Sumbit Review" class="btn btn-primary">
+                        {% else %}
+                            <p> You must purchase a product to post a review </p>
+                        {%endif%}
+                    </div><br>
+                    <script>
+                        function closemessage() {
+                              document.getElementById("message").style.display = "none";
+                              //document.getElementById("About").style.display = "none";
+                            }
+                      </script>
+                      {% if messages %} {% for message in messages %}
+                      <div id="message" style="display:block;" class="alert alert-success" role="alert">{{message}}
+                       <button onclick="closemessage()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span></div>
+                       </button>
+                   </div>
+                       {% endfor %} {% endif %}
+                </form>
+                <br>
+                <header class="section-heading">
+                    <h3>Customer Reviews</h3>
+                </header>
+                {%for review in reviews%}
+                    <article class="box mb-3">
+                        <div class="icontext w-100">
+                            <div class="text">
+                                <span class="date text-muted float-md-right">{{review.updated_at}}</span>
+                                <h6 class="mb-1">{{review.user_id}}</h6>
+                                <div class="rating-star">
+                                    <span>
+                                        <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{%elif review.rating < 1 %}-o {%endif%}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{%elif review.rating < 2 %}-o {%endif%}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{%elif review.rating < 3 %}-o {%endif%}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{%elif review.rating < 4 %}-o {%endif%}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{%elif review.rating < 5 %}-o {%endif%}" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <h6>{{review.subject}}</h6>
+                            <p>{{review.review}}
+                            </p>
+                        </div>
+                    </article>
+                    <hr>
+                {%endfor%}
+                {% comment %} <div class="container mt-5" style="margin-left:-35px;">
+                    
+                        <div class="col-md-8">
+                            <div class="d-flex flex-column comment-section">
+                                <div class="bg-white p-2">
+                                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{review.user_id}}</span><span class="date text-black-50">{{review.updated_at}}</span></div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="comment-text">{{review.review}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div> {% endcomment %}
+            <div class="mt-16">
+                <h3 class="text-gray-600 text-2xl font-medium">More Products</h3>
+                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80')">
+                            <button class="p-2 rounded-full bg-black text-white mx-5 -mb-4 hover:bg-zinc-500 focus:outline-none focus:bg-blue-500">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                        <div class="px-5 py-3">
+                            <h3 class="text-gray-700 uppercase">Chanel</h3>
+                            <span class="text-gray-500 mt-2">Rs.12</span>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')">
+                            <button class="p-2 rounded-full bg-black text-white mx-5 -mb-4 hover:bg-zinc-500 focus:outline-none focus:bg-blue-500">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                        <div class="px-5 py-3">
+                            <h3 class="text-gray-700 uppercase">Man Mix</h3>
+                            <span class="text-gray-500 mt-2">Rs.12</span>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1532667449560-72a95c8d381b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80')">
+                            <button class="p-2 rounded-full bg-black text-white mx-5 -mb-4 hover:bg-zinc-500 focus:outline-none focus:bg-blue-500">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                        <div class="px-5 py-3">
+                            <h3 class="text-gray-700 uppercase">Classic watch</h3>
+                            <span class="text-gray-500 mt-2">Rs.12</span>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1590664863685-a99ef05e9f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=345&q=80')">
+                            <button class="p-2 rounded-full bg-black text-white mx-5 -mb-4 hover:bg-zinc-500 focus:outline-none focus:bg-blue-500">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                        <div class="px-5 py-3">
+                            <h3 class="text-gray-700 uppercase">woman mix</h3>
+                            <span class="text-gray-500 mt-2">Rs.12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% comment %} {%endif%} {% endcomment %}
+    <footer class="bg-gray-200">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400">Brand</a>
+            <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+        </div>
+    </footer>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
