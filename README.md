@@ -1,7 +1,7 @@
 # Find Me – A Social Networking Platform  
 
 ## Introduction  
-Find Me is a social networking platform designed to connect small-scale vendors directly with customers, eliminating the need for intermediaries. Vendors can showcase their products, interact with customers, and manage orders, while customers can browse products, place orders, and communicate with vendors—all within a single platform.  
+The primary goal of FindMe is to help small businesses build an online presence and connect directly with customers through a community-oriented social platform. Vendors can showcase their products, interact with customers, and manage orders, while customers can browse offerings, place orders, and communicate with vendors—all within a single, integrated system. 
 
 ## Features  
 ### For Vendors  
