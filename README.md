@@ -1,4 +1,5 @@
-# Find Me – A Social Networking Platform  
+# Find Me – Social Commerce Platform
+  
 
 ## Introduction  
 The primary goal of FindMe is to help small businesses build an online presence and connect directly with customers through a community-oriented social platform. Vendors can showcase their products, interact with customers, and manage orders, while customers can browse offerings, place orders, and communicate with vendors—all within a single, integrated system. 
